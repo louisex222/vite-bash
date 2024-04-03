@@ -1,0 +1,38 @@
+.sec_header{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
+    z-index: 5;
+    background: url('@/assets/img//bg_header.jpg') no-repeat #070e1b;
+
+    .reg_head {
+        position: relative;
+        width: 1300px;
+        display: flex;
+        justify-content: flex-end;
+        padding: 25px 0 0;
+        margin: 0 auto;
+
+        .lnk_logo {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 192px;
+            height: 52px;
+            display: inline-block;
+            background: url('@/assets/img/logo.png') left top no-repeat;
+            background-size: contain;
+        }
+    }
+
+    .hr_gold{
+        height: 2px;
+        background: url('@/assets/img/hr_gold.svg') no-repeat;
+        background-size: 100% 2px;
+    }
+}
+
+
+

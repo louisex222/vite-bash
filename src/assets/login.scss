@@ -1,0 +1,16 @@
+.reg_head {
+    width: 1300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0 6px;
+    margin: 0 auto;
+}
+
+.lnk_logo {
+    width: 246px;
+    height: 68px;
+    display: block;
+    background: url('@/assets/img/logo.png') left top no-repeat;
+    background-size: contain;
+}
