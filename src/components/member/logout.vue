@@ -11,12 +11,13 @@ import { ElNotification } from 'element-plus'
 const router = useRouter()
 const fcSubmitLogout =  async(): Promise<void> => {
     const res = await logoutApi()
-    if (res) {
+    if (res.status === 1) {
         ElNotification({
             title: '登出成功',
             message: '歡迎再度光臨',
             type: 'success'
         })
+        localStorage.removeItem('userToken')
         router.push({path: '/'})
     }
 }

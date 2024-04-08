@@ -38,13 +38,13 @@ export default defineConfig({
     port: 9527,
     strictPort: true,
     open: true,
-    proxy: {
-      '^/api': {
-        target: 'http://localhost:3001/api',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
-    }
+    // proxy: {
+    //   '^/api': {
+    //     target: 'http://localhost:3001/api',
+    //     changeOrigin: true,
+    //     rewrite: (path) => path.replace(/^\/api/, '')
+    //   }
+    // }
   },
   base: './',
   css: {

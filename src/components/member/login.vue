@@ -23,8 +23,8 @@ interface Input {
 }
 const ruleFormRef = ref<FormInstance>()
 const form: Input = reactive({
-    username: '',
-    password: ''
+    username: 'Datw05',
+    password: '8888'
 })
 
 const validateUser = (rule: any, value: string, callback: any) => {
@@ -49,14 +49,23 @@ const fcLogin = async(): Promise<void> => {
     const param = {
         account: form.username,
         password: md5(form.password),
-        uikey: 'web' 
+        uidKey: 'web' 
     }
     const res = await loginApi(param)
-    if (res) {
+    if (res.status === 1) {
+        const user = res.result
+        localStorage.setItem('userToken', user.token)
          ElNotification({
             title: '登入成功',
             message: '歡迎回來',
             type: 'success'
+        })
+    }
+    else {
+        ElNotification({
+            title: '登入失敗',
+            message: 'api錯誤',
+            type: 'error'
         })
     }
 }
@@ -76,7 +85,7 @@ const submitForm = (form: FormInstance | undefined) => {
 </script>
 
 <style lang="scss" scoped >
-:deep .el-form-item__error {
+:deep(.el-form-item__error) {
     padding-left: 7px;
     padding-top: 5px;
 }

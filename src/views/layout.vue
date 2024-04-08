@@ -33,10 +33,6 @@ provide('isOpen', isOpen)
 
 .el-header {
   padding: 0;
-  margin-bottom: 15px;
-
-
-
 }
 </style>
 

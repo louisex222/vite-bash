@@ -1,10 +1,5 @@
 import axios from 'axios';
 
-interface IResponse {
-    code: number;
-    data: any;
-    msg: string;
-}
 const baseURL: string = import.meta.env.MODE === 'development' ? 'https://pwaapi.bacctest.com/' : 'https://pwaapi.bacc1688.com/'
 const timeout: number = 5000
 const service = axios.create({
@@ -19,20 +14,27 @@ function errorHandle(status: any, message: any) {
 }
 
 service.interceptors.request.use((config) => {
+    const token = localStorage.getItem('userToken')
+    if (!token) {
+        return Promise.reject('token不存在')
+    }
+    const { headers, url } = config
+    headers['Authorization'] = `Bearer ${token}`
     return config
 }, (error) => {
     return Promise.reject(error)
 })
 
-service.interceptors.response.use((response) =>
-    response.status === 200 ? Promise.resolve(response.data) : Promise.reject(response)
+service.interceptors.response.use((response) =>{
+            return response.data
+        }
     , (error) => {
         const { response } = error
         if (response) {
             errorHandle(response.status, response.data.message)
             return Promise.reject(response)
         } else {
-            console.log('请求失败')
+            console.log('請求失敗')
         }
     }
 )

@@ -5,11 +5,14 @@
         <el-collapse v-model="activeNames" @change="handleChange">
             <el-collapse-item title="會員功能" name="1">
                 <div class="list">
-                    <el-link  @click="fcMoveRounter('loginView')" :underline="false">登入</el-link>
-                    <el-link  @click="fcMoveRounter('logoutView')" :underline="false">登出</el-link>
+                    <el-link v-for="(item,index) in routerList" :key="index" @click="fcMoveRounter(item.path)" :underline="false">{{ item.name }}</el-link> 
                 </div>
             </el-collapse-item>
-
+            <el-collapse-item title="遊戲列表" name="2">
+                <div class="list">
+                    <el-link v-for="(item,index) in routerGameList" :key="index" @click="fcMoveRounter(item.path)" :underline="false">{{ item.name }}</el-link> 
+                </div>
+            </el-collapse-item>
         </el-collapse>
     </div>
 
@@ -18,7 +21,8 @@
 <script setup lang="ts">
 import { useRouter} from 'vue-router'
 const activeNames = ref(['1'])
-const  router= useRouter()
+const router = useRouter()
+console.log(router.options.routes[1].children)
 const handleChange = (val: string[]) => {
   console.log(val)
 }
@@ -31,7 +35,12 @@ const props = defineProps({
 const fcMoveRounter = (value: string): void => {
     router.push({ path: value })
 }
-console.log(props.isOpen)
+const routerList = computed(() => {
+    return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index<4)
+})
+const routerGameList = computed(() => {
+    return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index>3)
+})
 </script>
 
 <style scoped lang="scss">

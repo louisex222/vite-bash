@@ -1,9 +1,8 @@
 import index from '../index'
 
-// Path: src/service/index.ts
-// Compare this snippet from src/service/index.ts:
-// import axios from 'axios';
-//
+export interface IPromotionList {
+    Language:string
+}
 export const getList = () => {
     return index({
         url: '/api/slotGameList',
@@ -12,3 +11,18 @@ export const getList = () => {
     })
 }
 
+export const dataVersionApi = (): Promise<any> => {
+    return index({
+        url: '/webCache/GetDataVersionList',
+        method: 'get',
+        data: {}
+    })
+}
+
+export const getPromotionListApi = (param: IPromotionList): Promise<any> => {
+    return index({
+        url: '/webCache/GetPromotionList',
+        method: 'get',
+        data: param
+    })
+}
