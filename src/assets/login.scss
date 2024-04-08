@@ -1,16 +1,32 @@
 .reg_head {
-    width: 1300px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0 6px;
-    margin: 0 auto;
+  width: 1300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 6px;
+  margin: 0 auto;
 }
 
 .lnk_logo {
-    width: 246px;
-    height: 68px;
-    display: block;
-    background: url('@/assets/img/logo.png') left top no-repeat;
-    background-size: contain;
+  width: 246px;
+  height: 68px;
+  display: block;
+  background: url("@/assets/img/logo.png") left top no-repeat;
+  background-size: contain;
+}
+
+.el-container {
+  transition: 0.5s ease;
+  transform: translateX(0);
+
+  &.isOpen {
+    position: relative;
+    transform: translateX(-300px);
+    transition: 0.5s ease;
+  }
+}
+
+.el-header {
+  padding: 0;
+  margin-bottom: 15px;
 }

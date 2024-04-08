@@ -29,6 +29,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@/views': path.resolve(__dirname, './src/views'),
       '@/locales': path.resolve(__dirname, './src/locales'),
+      '@/vite': path.resolve(__dirname, './src/vite'),
     },
     extensions: [".js", ".json", ".ts", ".vue"],
   },

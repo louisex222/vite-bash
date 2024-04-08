@@ -170,6 +170,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@element-plus/icons-vue@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "@element-plus/icons-vue@npm:2.3.1"
+  peerDependencies:
+    vue: ^3.2.0
+  checksum: 70c4b86aefc13897b8d450c73899755df75c3f24514ada61e78a6ca7bc4ba7d2b5df11dd6cef9365c70fbc46ad09ad144deb4bf4b2268a362c56200d96efefe4
+  languageName: node
+  linkType: hard
+
 "@esbuild/android-arm64@npm:0.18.20":
   version: 0.18.20
   resolution: "@esbuild/android-arm64@npm:0.18.20"
@@ -4745,6 +4754,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"js-md5@npm:^0.8.3":
+  version: 0.8.3
+  resolution: "js-md5@npm:0.8.3"
+  checksum: 2f74961bb21293cc4e023685985b531748da88c5e57fd4ef96d1d292e0918c09a4b192c425520c0aea6988190e9694c2e38ed34f7907a908614e6b133095f882
+  languageName: node
+  linkType: hard
+
 "js-message@npm:1.0.7":
   version: 1.0.7
   resolution: "js-message@npm:1.0.7"
@@ -8314,6 +8330,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vite-new@workspace:."
   dependencies:
+    "@element-plus/icons-vue": "npm:^2.3.1"
     "@intlify/vite-plugin-vue-i18n": "npm:^7.0.0"
     "@tsconfig/node18": "npm:^18.2.2"
     "@types/node": "npm:^18.18.3"
@@ -8326,6 +8343,7 @@ __metadata:
     axios: "npm:^1.5.1"
     element-plus: "npm:^2.3.14"
     eslint: "npm:^8.50.0"
+    js-md5: "npm:^0.8.3"
     npm-run-all2: "npm:^6.0.6"
     sass: "npm:^1.69.2"
     stylelint: "npm:^15.10.3"

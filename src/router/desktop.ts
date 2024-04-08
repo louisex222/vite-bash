@@ -7,6 +7,8 @@ interface routerInter {
 
 const dynamicRouter: Array<routerInter> = [
     'home',
+    'loginView',
+    'logoutView'
 ].map((name) => {
     return {
         path: name === 'home' ? '/' : `/${name}`,
