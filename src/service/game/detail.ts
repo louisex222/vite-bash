@@ -21,8 +21,8 @@ export const dataVersionApi = (): Promise<any> => {
 
 export const getPromotionListApi = (param: IPromotionList): Promise<any> => {
     return index({
-        url: '/webCache/GetPromotionList',
-        method: 'get',
+        url: '/api/Utils/EventNews',
+        method: 'post',
         data: param
     })
 }

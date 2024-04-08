@@ -11,6 +11,7 @@ const dynamicRouter: Array<routerInter> = [
     'logoutView',
     'changePasswordView',
     'dataVersionView',
+    'promotionView',
 ].map((name) => {
     return {
         path: name === 'home' ? '/' : `/${name}`,

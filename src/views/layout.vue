@@ -15,6 +15,9 @@
 <script setup lang="ts">
 import Header from '@/components/header.vue'
 import Aside from '@/components/aside.vue'
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n()
+localStorage.setItem('locale', locale.value)
 const isOpen: Ref<any> = ref(true)
 provide('isOpen', isOpen)
 </script>

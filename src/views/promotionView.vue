@@ -1,12 +1,11 @@
 <template>
     <div>
-        <Logout /> 
+        <Promotion />
     </div>
 </template>
 
 <script setup lang="ts">
-import Logout from '@/components/member/logout.vue'
-
+import  Promotion from '@/components/resource/promotions.vue'
 </script>
 
 <style scoped>
