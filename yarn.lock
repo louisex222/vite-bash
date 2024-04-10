@@ -2864,6 +2864,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"csv-parse@npm:^5.5.5":
+  version: 5.5.5
+  resolution: "csv-parse@npm:5.5.5"
+  checksum: 759ca2e5f3977cac7cbf3b1992dd507c6dd458163ab60671e7959d7aefd5b367d7043db65d55ed77ec56aeba2ecfa0881a2c416a44341edcfd266c3d29a424f0
+  languageName: node
+  linkType: hard
+
 "dayjs@npm:^1.11.3":
   version: 1.11.10
   resolution: "dayjs@npm:1.11.10"
@@ -8341,6 +8348,7 @@ __metadata:
     "@vue/runtime-core": "npm:^3.3.4"
     "@vue/tsconfig": "npm:^0.4.0"
     axios: "npm:^1.5.1"
+    csv-parse: "npm:^5.5.5"
     element-plus: "npm:^2.3.14"
     eslint: "npm:^8.50.0"
     js-md5: "npm:^0.8.3"
@@ -8353,6 +8361,7 @@ __metadata:
     unplugin-auto-import: "npm:^0.16.6"
     vite: "npm:^4.4.9"
     vue: "npm:^3.3.4"
+    vue-draggable-plus: "npm:^0.4.0"
     vue-eslint-parser: "npm:^9.3.1"
     vue-i18n: "npm:^9.5.0"
     vue-router: "npm:^4.2.4"
@@ -8414,6 +8423,18 @@ __metadata:
     vue-demi-fix: bin/vue-demi-fix.js
     vue-demi-switch: bin/vue-demi-switch.js
   checksum: cafe2b92039dac74e813bdf3db322c09f8fd0367f5650eca9b67ac08f749c7214dd75b7ef05f5ec4ffc8461eeff7151f09b9b6ad270edd49888de5b4c2985df4
+  languageName: node
+  linkType: hard
+
+"vue-draggable-plus@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "vue-draggable-plus@npm:0.4.0"
+  peerDependencies:
+    "@types/sortablejs": ^1.15.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+  checksum: 6e798ae4135715e55af2fb06a0a95152dcd6fa3996d0e49f67edbe1639cfc2462181018bf43dc29de417b529d3830549839c00162386315e88bb9c62749eb8d5
   languageName: node
   linkType: hard
 

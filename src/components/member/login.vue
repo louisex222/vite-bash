@@ -15,14 +15,12 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
 import { loginApi } from '@/service/member/index'
+import { ILoginParam } from '@/vite/api';
 import { md5 } from 'js-md5'; 
 import { ElNotification } from 'element-plus'
-interface Input {
-    username: string
-    password: string
-}
+
 const ruleFormRef = ref<FormInstance>()
-const form: Input = reactive({
+const form = reactive({
     username: 'Datw05',
     password: '8888'
 })
@@ -46,7 +44,7 @@ const rules = reactive<FormRules<typeof form>>({
     password: [{ required: true, validator: validatePassword, message: "请输入密码" }]
 })
 const fcLogin = async(): Promise<void> => {
-    const param = {
+    const param: ILoginParam = {
         account: form.username,
         password: md5(form.password),
         uidKey: 'web' 

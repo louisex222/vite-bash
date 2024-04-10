@@ -1,10 +1,5 @@
 import axios from 'axios';
 
-interface IResponse {
-    code: number;
-    data: any;
-    msg: string;
-}
 const baseURL: string = import.meta.env.MODE === 'development' ? 'https://pwaapi.bacctest.com/' : 'https://pwaapi.bacc1688.com/'
 const timeout: number = 5000
 const service = axios.create({

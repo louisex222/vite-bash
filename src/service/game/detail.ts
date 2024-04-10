@@ -1,8 +1,6 @@
 import index from '../index'
+import { IPromotionList} from '@/vite/api'
 
-export interface IPromotionList {
-    Language:string
-}
 export const getList = () => {
     return index({
         url: '/api/slotGameList',

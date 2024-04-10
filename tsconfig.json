@@ -3,7 +3,7 @@
     "./src/**/*.ts",
     "./src/**/*.vue",
     "./src/vite/auto-imports.d.ts"
-  ],
+, "csvtoJson.ts"  ],
   "compilerOptions": {
     "moduleResolution": "node",
     "module": "es2020",

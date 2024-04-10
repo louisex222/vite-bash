@@ -19,7 +19,8 @@
 
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
-import { changePwdApi, IChangePwdParam } from '@/service/member/index'
+import { changePwdApi } from '@/service/member/index'
+import { IChangePwdParam } from '@/vite/api';
 import { md5 } from 'js-md5';
 import { ElNotification } from 'element-plus'
 const ruleFormRef = ref<FormInstance>()
