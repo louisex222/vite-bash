@@ -5,12 +5,20 @@
         <el-collapse v-model="activeNames" @change="handleChange">
             <el-collapse-item title="會員功能" name="1">
                 <div class="list">
-                    <el-link v-for="(item,index) in routerList" :key="index" @click="fcMoveRounter(item.path)" :underline="false">{{ item.name }}</el-link> 
+                    <el-link v-for="(item,index) in routerList" :key="index" @click="fcMoveRounter(item.path)"
+                        :underline="false">{{ $t(item.name) }}</el-link>
                 </div>
             </el-collapse-item>
-            <el-collapse-item title="遊戲列表" name="2">
+            <el-collapse-item title="其他列表" name="2">
                 <div class="list">
-                    <el-link v-for="(item,index) in routerGameList" :key="index" @click="fcMoveRounter(item.path)" :underline="false">{{ item.name }}</el-link> 
+                    <el-link v-for="(item,index) in routerOtherList" :key="index" @click="fcMoveRounter(item.path)"
+                        :underline="false">{{ $t(item.name) }}</el-link>
+                </div>
+            </el-collapse-item>
+            <el-collapse-item title="遊戲列表" name="3">
+                <div class="list">
+                    <el-link v-for="(item,index) in routerGameList" :key="index" @click="fcMoveRounter(item.path)"
+                        :underline="false">{{ $t(item.name) }}</el-link>
                 </div>
             </el-collapse-item>
         </el-collapse>
@@ -35,11 +43,14 @@ const props = defineProps({
 const fcMoveRounter = (value: string): void => {
     router.push({ path: value })
 }
-const routerList = computed(() => {
+const routerList:any = computed(() => {
     return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index<4)
 })
-const routerGameList = computed(() => {
-    return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index>3)
+const routerGameList:any = computed(() => {
+    return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index>5)
+})
+const routerOtherList: any = computed(() => {
+    return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index>3 && index<6)
 })
 </script>
 

@@ -1,3 +1,9 @@
     {
-        "hello": "你好世界"
+        "hello": "你好世界",
+        "gameListView":"電子遊戲",
+        "promotionView":"活動頁面",
+        "dataVersionView":"資料版本",
+        "loginView":"登入",
+        "logoutView":"登出",
+        "changePasswordView":"修改密碼"
     }
