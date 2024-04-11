@@ -33,10 +33,18 @@ export const getClubListApi = (): Promise<any> => {
     })
 }
 
-export const enterSlotGameApi = (game:string,param: any): Promise<any> => {
+export const enterGameApi = (game:string,param: any): Promise<any> => {
     return byjwtindex({
         url: `/api/Game/GetGameToken/${game}`,
         method: 'post',
+        data: param
+    })
+}
+
+export const getCardGameApi = (param: string) => {
+    return index({
+        url: `/webCache/GetTableGame${param}List`,
+        method: 'get',
         data: param
     })
 }

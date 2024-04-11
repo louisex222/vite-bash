@@ -13,6 +13,7 @@ const dynamicRouter: Array<routerInter> = [
     'dataVersionView',
     'promotionView',
     'gameListView',
+    'cardGameView'
     
 ].map((name) => {
     return {

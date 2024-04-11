@@ -46,11 +46,11 @@ const fcMoveRounter = (value: string): void => {
 const routerList:any = computed(() => {
     return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index<4)
 })
-const routerGameList:any = computed(() => {
-    return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index>5)
-})
 const routerOtherList: any = computed(() => {
     return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index>3 && index<6)
+})
+const routerGameList:any = computed(() => {
+    return router.options.routes[1].children?.filter((item,index) => item.name !== 'home' && index>5)
 })
 </script>
 

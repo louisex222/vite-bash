@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import GameList from '@/components/game/gameList'
+import GameList from '@/components/game/slotGame.vue'
 </script>
 
 <style scoped>

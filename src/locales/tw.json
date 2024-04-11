@@ -5,5 +5,6 @@
         "dataVersionView":"資料版本",
         "loginView":"登入",
         "logoutView":"登出",
-        "changePasswordView":"修改密碼"
+        "changePasswordView":"修改密碼",
+        "cardGameView":"棋牌遊戲"
     }
