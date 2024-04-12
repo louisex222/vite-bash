@@ -12,9 +12,10 @@ const dynamicRouter: Array<routerInter> = [
     'changePasswordView',
     'dataVersionView',
     'promotionView',
-    'gameListView',
+    'slotGameView',
     'cardGameView',
-    'tableGameView'
+    'liveGameView',
+    'lotteryGameView'
     
 ].map((name) => {
     return {
