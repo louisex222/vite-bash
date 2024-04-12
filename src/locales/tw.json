@@ -6,5 +6,6 @@
         "loginView":"登入",
         "logoutView":"登出",
         "changePasswordView":"修改密碼",
-        "cardGameView":"棋牌遊戲"
+        "cardGameView":"棋牌遊戲",
+        "tableGameView":"桌號"
     }

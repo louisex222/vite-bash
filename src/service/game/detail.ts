@@ -1,6 +1,6 @@
 import index from '../index'
 import byjwtindex from '../byjwtindex'
-import { IPromotionList} from '@/vite/api'
+import { IPromotionList,ITableList } from '@/vite/api'
 
 export const getSlotGameApi = (param: string) => {
     return index({
@@ -45,6 +45,14 @@ export const getCardGameApi = (param: string) => {
     return index({
         url: `/webCache/GetTableGame${param}List`,
         method: 'get',
+        data: param
+    })
+}
+
+export const getTableGameApi = (param: ITableList): Promise<any> => {
+    return index({
+        url: '/webCache/GetAllTableList',
+        method: 'post',
         data: param
     })
 }

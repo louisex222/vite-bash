@@ -12,3 +12,7 @@ export interface IChangePwdParam {
 export interface IPromotionList {
     Language:string
 }
+
+export interface ITableList{
+    gameType: number
+}
