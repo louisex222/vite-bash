@@ -9,7 +9,7 @@
                 #header>{{ item.imagePath }} : {{ item.name
                 }}
             </template>
-            <img :src="fcGetImage(item.thirdPartyId)" style="width: 100%" @click="fcEnterGame(item)" />
+            <img :src="fcGetImage()" style="width: 100%" @click="fcEnterGame(item)" alt="item.name" />
         </el-card>
         <div class="status">
             {{ statusData }}
@@ -21,9 +21,11 @@
 import { getTableGameApi, getClubListApi, enterGameApi } from '@/service/game/detail'
 import { ElNotification } from 'element-plus'
 import { ITableList } from '@/vite/api';
+import {Club, Game} from '@/vite/game';
+import {Ref} from 'vue'
 const { locale } = useI18n()
-const tableList: Ref<any> = ref([])
-const clubList: Ref<any> = ref()
+const tableList: Ref<Game[]> = ref([])
+const clubList: Ref<Club[]> = ref([])
 const statusData: Ref<any> = ref()
 
 const fcGetTableGame = async (thirdPartyId: string): Promise<void> => {
@@ -33,7 +35,7 @@ const fcGetTableGame = async (thirdPartyId: string): Promise<void> => {
     const result = await getTableGameApi(param)
     if (result) {
         tableList.value = result
-            .filter((game: any, index: number) => game.thirdPartyId === thirdPartyId)
+            .filter((game: any) => game.thirdPartyId === thirdPartyId)
             .slice(0, 1)
 
     } else {
@@ -57,17 +59,12 @@ const fcGetClubList = async (): Promise<void> => {
 }
 fcGetClubList()
 const fcSwitchClub = async (thirdPartyId: string): Promise<void> => {
-    fcGetTableGame(thirdPartyId)
+    await fcGetTableGame(thirdPartyId)
     statusData.value = ''
 }
 
-const fcGetImage = (thirdPartyId: string) => {
-    try {
+const fcGetImage = () => {
         return 'https://shot.17live.store/default/TAI01.jpg?last_time=0'
-    } catch (error) {
-        console.log(error)
-    }
-
 }
 const fcEnterGame = async (game: any) => {
     const param = {

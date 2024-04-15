@@ -11,4 +11,7 @@ module.exports = {
     },
     extends: ["eslint:recommended", "plugin:vue/vue3-essential","./.eslintrc-auto-import.json",],
     plugins: ["vue"],
+    env: {
+        node: true,
+    },
 }
