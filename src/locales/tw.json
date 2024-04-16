@@ -1,4 +1,4 @@
-    {
+{
         "hello": "你好世界",
         "slotGameView":"電子遊戲",
         "promotionView":"活動頁面",
@@ -8,5 +8,7 @@
         "changePasswordView":"修改密碼",
         "cardGameView":"棋牌遊戲",
         "liveGameView":"真人桌",
-        "lotteryGameView":"彩票桌"
-    }
+        "lotteryGameView":"彩票桌",
+        "memberInfoView":"會員資料",
+        "creditView": "信用資料"
+}

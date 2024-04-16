@@ -66,7 +66,7 @@ const fcSwitchClub = async (thirdPartyId: string): Promise<void> => {
 const fcGetImage = () => {
         return 'https://shot.17live.store/default/TAI01.jpg?last_time=0'
 }
-const fcEnterGame = async (game: any) => {
+const fcEnterGame = async (game: any) => {``
     const param = {
         device: 'MOBILE',
         lang: locale.value,

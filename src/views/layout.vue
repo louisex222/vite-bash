@@ -14,7 +14,7 @@
 </template>
 <script setup lang="ts">
 import Header from '@/components/header.vue'
-import Aside from '@/components/aside.vue'
+import Aside from '@/components/asideCom.vue'
 import { useI18n } from 'vue-i18n'
 const { locale } = useI18n()
 localStorage.setItem('locale', locale.value)

@@ -26,3 +26,20 @@ export const changePwdApi = (data:IChangePwdParam): Promise<any> => {
         data
     })
 }
+
+export const getBalanceApi = (): Promise<any>=>{
+    return byjwtindex({
+        url: '/api/UnReturnAccount/ForceUpdateMoney',
+        method: 'post',
+        data: {}
+    })
+}
+
+
+export const getMemberInfoApi = (data:any): Promise<any> => {
+    return index({
+        url: 'http://10.20.37.26:8000/api/Member/userInfo',
+        method: 'post',
+        data
+    })
+}

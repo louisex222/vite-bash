@@ -6,7 +6,7 @@ const service = axios.create({
     baseURL: baseURL,
     timeout,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     }
 })
 function errorHandle(status: any, message: any) {

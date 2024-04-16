@@ -4,7 +4,6 @@
             <el-table-column prop="id" label="id" width="100" />
             <el-table-column prop="code" label="code" width="250" />
             <el-table-column prop="version" label="version" />
-            <el-table-column prop="version" label="version" />
             <el-table-column prop="active" label="active" />
             <el-table-column prop="autopilot" label="autopilot" />
         </el-table>
