@@ -16,3 +16,7 @@ export interface IPromotionList {
 export interface ITableList{
     gameType: number
 }
+
+export interface IServerId {
+    thirdParty_id: string,
+}

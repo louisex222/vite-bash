@@ -10,5 +10,6 @@
         "liveGameView":"真人桌",
         "lotteryGameView":"彩票桌",
         "memberInfoView":"會員資料",
-        "creditView": "信用資料"
+        "creditView": "信用資料",
+        "serverIdView": "遊戲伺服器"
 }

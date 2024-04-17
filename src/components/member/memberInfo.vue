@@ -23,7 +23,7 @@ fcGetMemberInfo()
 <template>
  <div>
    <el-table :data="memberInfo" style="width: 1200px;" scrollbar-always-on stripe border>
-     <el-table-column prop="Club_Ename" label="Club_Ename" width="100" />
+     <el-table-column prop="Club_Ename" label="Club_Ename" width="150" />
      <el-table-column prop="Club_id" label="Club_id" width="250" />
      <el-table-column prop="PanZu" label="PanZu" width="250" />
      <el-table-column prop="OnlineTime" label="OnlineTime" width="250" />
