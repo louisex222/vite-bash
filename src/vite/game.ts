@@ -9,8 +9,11 @@ export interface Club{
     name: string,
 }
 
-export interface RouterInterface {
-    path: string,
-    name: string,
-    children?: Array<RouterInterface>
-}
+export interface IClubList
+        {
+            thirdPartyId: string,
+            games: Game[]
+        }
+
+
+

@@ -18,7 +18,7 @@ service.interceptors.request.use((config) => {
     if (!token) {
         return Promise.reject('token不存在')
     }
-    const { headers, url } = config
+    const { headers } = config
     headers['Authorization'] = `Bearer ${token}`
     return config
 }, (error) => {
