@@ -21,6 +21,7 @@
 import { getSlotGameApi, getClubListApi, enterGameApi } from '@/service/game/detail'
 import { Game } from '@/vite/game'
 import { InterSlotImage } from '@/vite/homeInter'
+import {ElNotification} from "element-plus";
 const { locale } = useI18n()
 const gameList: Ref<Game[]> = ref([])
 const clubList: Ref<any> = ref()
@@ -72,6 +73,15 @@ const fcSwitchEnterParam = (game:string) => {
     return data
 }
 const fcOpenGame = async (game:any) => {
+  const token = localStorage.getItem('userToken')
+  if(!token) {
+    ElNotification({
+      title: '提示',
+      message: '請先登入',
+      type: 'error'
+    },)
+    return
+  }
     const param = {
         device:  'DESKTOP',
         lang: locale.value,

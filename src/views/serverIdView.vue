@@ -1,5 +1,5 @@
 <script setup lang="ts">
- import ServerId from "@/components/game/serverId"
+ import ServerId from "@/components/game/serverId.vue"
 </script>
 
 <template>

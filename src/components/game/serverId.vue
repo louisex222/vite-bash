@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {getClubListApi} from '@/service/game/detail';
+import {getClubListApi ,getServerIdApi} from '@/service/game/detail';
 import {IClubList } from '@/vite/game'
 import { Ref} from 'vue';
-const clubList:Ref<IClubList> = ref({});
+const clubList:Ref<IClubList[]> = ref({});
 
 const fcGetClubList = async (): Promise<void> => {
   const res: any = await getClubListApi()
@@ -18,15 +18,25 @@ const fcGetClubList = async (): Promise<void> => {
 }
 fcGetClubList()
 
+const fcGetServerId = async (clubId : string) => {
+  const res: any = await getServerIdApi(clubId)
+  console.log('serverId', res)
+}
+const fcSwitchServer = (serverId : string) =>{
+  fcGetServerId(serverId)
+}
+
 </script>
 
 <template>
   <el-button
       type="primary"
-      plain v-for="(index) in clubList"
+      plain v-for="(item,index) in clubList"
       v-bind:key="index"
       class="club-btn"
+      @click="fcSwitchServer(item.thirdPartyId)"
   >
+    {{item.thirdPartyId}}
   </el-button>
 </template>
 

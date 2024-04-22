@@ -30,6 +30,8 @@ const userConfig = defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@/views': path.resolve(__dirname, './src/views'),
       '@/locales': path.resolve(__dirname, './src/locales'),
+      '@/components' : path.resolve(__dirname, './src/components'),
+      '@/service' : path.resolve(__dirname, './src/service'),
     },
     extensions: [".js", ".json", ".ts", ".tsx", "jsx"]  // 導入時想要省略的擴展名列表
   },

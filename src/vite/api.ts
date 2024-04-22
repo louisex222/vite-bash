@@ -9,14 +9,24 @@ export interface IChangePwdParam {
     password_Check: string
 }
 
-export interface IPromotionList {
+export interface ISlotGameParam {
+    thirdPartyId: string,
+}
+export interface ITableGameParam {
+    thirdPartyId: string,
+}
+export interface IPromotionListParam {
     Language:string
 }
 
-export interface ITableList{
+export interface ITableListParam{
     gameType: number
 }
 
-export interface IServerId {
+export interface IServerIdParam {
     thirdParty_id: string,
+}
+
+export interface  IMemberInfoParam{
+    account: string
 }

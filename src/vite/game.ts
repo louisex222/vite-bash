@@ -9,11 +9,10 @@ export interface Club{
     name: string,
 }
 
-export interface IClubList
-        {
-            thirdPartyId: string,
-            games: Game[]
-        }
+export interface IClubList {
+    thirdPartyId: string,
+    games: Game[]
+}
 
 
 

@@ -1,34 +1,53 @@
-import index from '../index'
-import byjwtindex from '../byjwtindex'
-import {ILoginParam,IChangePwdParam } from '@/vite/api'
+import { request  } from '../index'
+import { byJwtrequest } from '../byjwtindex'
+import {ILoginParam,IChangePwdParam ,IMemberInfoParam  } from '@/vite/api'
+import { AxiosResponse } from 'axios'
 
-export const loginApi = (data: ILoginParam):Promise<any> => {
-    return index({
+/**
+ * 透過對指定URL進行POST請求來登錄會員的函數。
+ * @param {ILoginParam} data - 與請求一起發送的數據。
+ * @returns {Promise<any>} 解析為POST請求響應的Promise。
+ */
+export const loginApi = (data: ILoginParam):Promise<AxiosResponse<any>> => {
+    return request({
         url: '/api/Member/Login',
         method: 'post',
         data
     })
 }
 
-export const logoutApi = ():Promise<any> => {
-    return byjwtindex({
+/**
+ * 透過對指定URL進行POST請求來登出會員的函數。
+ * @returns {Promise<any>} 解析為POST請求響應的Promise。
+ */
+export const logoutApi = ():Promise<AxiosResponse<any>> => {
+    return byJwtrequest({
         url: '/api/Member/Logout',
         method: 'post',
         data: {}
     })
 }
 
-
-export const changePwdApi = (data:IChangePwdParam): Promise<any> => {
-    return byjwtindex({
+/**
+ * 透過對指定URL進行POST請求來更改會員密碼的函數。
+ * @param {IChangePwdParam} data - 與請求一起發送的數據。
+ * @returns {Promise<any>} 解析為POST請求響應的Promise。
+ */
+export const changePwdApi = (data:IChangePwdParam): Promise<AxiosResponse<any>> => {
+    return byJwtrequest({
         url: '/api/Member/ChangePWD',
         method: 'post',
         data
     })
 }
 
-export const getBalanceApi = (): Promise<any>=>{
-    return byjwtindex({
+/**
+ * 透過對指定URL進行POST請求來獲取會員信用點數
+ *
+ * @returns {Promise<any>} 解析為POST請求響應的Promise。
+ */
+export const getBalanceApi = (): Promise<AxiosResponse<any>> =>{
+    return byJwtrequest({
         url: '/api/UnReturnAccount/ForceUpdateMoney',
         method: 'post',
         data: {}
@@ -36,8 +55,14 @@ export const getBalanceApi = (): Promise<any>=>{
 }
 
 
-export const getMemberInfoApi = (data:any): Promise<any> => {
-    return index({
+/**
+ * 透過對指定URL進行POST請求來獲取會員信息的函數。
+ *
+ * @param {IMemberInfoParam} data - 與請求一起發送的數據。
+ * @returns {Promise<any>} 解析為POST請求響應的Promise。
+ */
+export const getMemberInfoApi = (data:IMemberInfoParam): Promise<AxiosResponse<any>> => {
+    return request({
         url: 'http://10.20.37.26:8000/api/Member/userInfo',
         method: 'post',
         data

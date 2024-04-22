@@ -19,6 +19,12 @@
       ],
       "@/locales": [
         "./src/locales/*"
+      ],
+      "@/components": [
+        "./src/components/*"
+      ],
+      "@/service": [
+        "./src/service/*"
       ]
     },
     "skipLibCheck": true, // 跳過所有的聲明文件（.d.ts）的類型檢查

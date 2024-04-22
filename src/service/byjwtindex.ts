@@ -39,12 +39,12 @@ service.interceptors.response.use((response) =>{
     }
 )
 
-interface IRequest {
+export interface IRequest {
     url: string;
     method: string;
     data: any;
 }
-const request = ({ url, method, data }: IRequest) => {
+export const byJwtrequest = ({ url, method, data }: IRequest) => {
     return service({
         url,
         method,
@@ -52,5 +52,5 @@ const request = ({ url, method, data }: IRequest) => {
     })
 }
 
-export default request
+
 

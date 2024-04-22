@@ -6,17 +6,28 @@
   </div>
 </template>
 <script setup lang="ts">
-import { getBalanceApi ,getMemberInfoApi } from '@/service/member'
+import { getBalanceApi  } from '@/service/member'
 import { ElNotification } from 'element-plus'
+import {  Ref } from 'vue'
 const  balance : Ref<number> = ref(10)
 const balanceComputed = computed(() => {
   return balance.value.toFixed(2)
 })
-const fcGetBalance = async () => {
-  const res = await getBalanceApi()
+const fcGetBalance = async (): Promise<void> => {
+  const token = localStorage.getItem('userToken')
+      if(!token) {
+        ElNotification({
+          title: '提示',
+          message: '請先登入',
+          type: 'error'
+        },)
+        return
+      }
+  const res:any = await getBalanceApi()
   if(res.status ===1){
-    if(res.result.totalMoney){
-      balance.value = res.result.totalMoney
+    const {totalMoney} = res.result
+    if(totalMoney){
+      balance.value = totalMoney
       ElNotification({
         title: '提示',
         message: '獲取餘額成功',
@@ -29,9 +40,10 @@ const fcGetBalance = async () => {
         message: '獲取餘額失敗',
         type: 'error'
       },)
-      countDown(10)
+      fcCountDown(10)
     }
   }
+
 }
 
 let time:Ref<number> = ref(10)
