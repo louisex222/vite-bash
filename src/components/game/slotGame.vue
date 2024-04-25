@@ -1,35 +1,57 @@
 <template>
-    <div class=" game-wrap">
-        <el-button type="primary" plain v-for="(item,index) in clubList" :key="index"
-            @click="fcSwitchClub(item.thirdPartyId)" class="club-btn">
-            {{item.thirdPartyId}}
-        </el-button>
-
-        <el-card style="width: 300px" shadow="always" v-for="(item, index) in gameList" :key="index"><template
-                #header>{{ item.imagePath}} : {{ item.name
-                }}
-            </template>
-            <img :src="fcGetImage(item.imagePath,item.id)" style="width: 100%" @click="fcOpenGame(item)" />
-        </el-card>
-        <div class="status">
-            {{ statusData }}
-        </div>
+    <el-button type="primary" plain v-for="(item,index) in clubList" :key="index"
+        @click="fcSwitchClub(item.thirdPartyId)" class="club-btn">
+        {{item.thirdPartyId}}
+    </el-button>
+  <el-result
+      v-if="statusData.status !== 0"
+      :icon="statusData.status === 1? 'success' : 'error'"
+      :title="$t(statusData.desc)"
+      :sub-title="statusData.errorDetail !== null ? $t(statusData.errorDetail) : '網址: ' + statusData.result.urlInfo"
+  >
+    <template #extra>
+      <el-button type="primary">{{statusData.status}}</el-button>
+    </template>
+  </el-result>
+    <div class="game-wrap">
+          <el-card style="width: 300px"  shadow="always" v-for="(item, index) in gameList" :key="index" @click="fcOpenGame(item)">
+                <div>
+                  {{ item.imagePath}} : {{ item.name }} {{item.id}}
+                </div>
+          </el-card>
     </div>
 </template>
 
 <script setup lang="ts">
 import { getSlotGameApi, getClubListApi, enterGameApi } from '@/service/game/detail'
-import { Game } from '@/vite/game'
+import {IClub, ISlotGame,} from '@/vite/data'
 import { InterSlotImage } from '@/vite/homeInter'
 import {ElNotification} from "element-plus";
+import {Ref} from 'vue'
 const { locale } = useI18n()
-const gameList: Ref<Game[]> = ref([])
-const clubList: Ref<any> = ref()
-const statusData : Ref<any> = ref()
-const fcGetSlotGame = async (thirdPartyId: string): Promise<void> => {
-    const res:any = await getSlotGameApi(thirdPartyId)
+const gameList: Ref<ISlotGame[]> = ref([])
+const clubList: Ref<IClub[]> = ref([])
+type TstatusData = {
+  status: number,
+  result: {
+    urlInfo:string
+  },
+  desc:string,
+  errorDetail: null | string
+}
+const statusData :Ref<TstatusData> =ref({
+  status: 0,
+  result: {
+    urlInfo: '',
+  },
+  desc: '',
+  errorDetail: null
+})
+
+const fcGetSlotGame = async (third: string): Promise<void> => {
+    const res :any = await getSlotGameApi(third)
     if(res){
-        gameList.value = res.filter((item: Game, index: number) => index === 0)
+        gameList.value = res
         console.log(gameList.value)
     }
 }
@@ -37,26 +59,33 @@ fcGetSlotGame('Royal')
 
 const fcGetClubList = async (): Promise<void> => {
     const res: any = await getClubListApi()
-    const excludedeClub = ['Favorites', 'MobileHot','Golden']
-    
+    const excludedClub = ['Favorites', 'MobileHot','Golden']
+
     if (res) {
         clubList.value = res
-            .filter((item?: any) => item.gameType === 3 && item.active === true && !excludedeClub.includes(item.thirdPartyId)) 
+            .filter((item?: any) => item.gameType === 3 && item.active === true && !excludedClub.includes(item.thirdPartyId))
             .sort((a:any,b:any)=> a.sort - b.sort)
-       
+
     }
 }
 fcGetClubList()
-const fcSwitchClub = async (thirdPartyId: string): Promise<void> => {
-    fcGetSlotGame(thirdPartyId)
-    statusData.value = ''
+const fcSwitchClub = async (third: string): Promise<void> => {
+    await fcGetSlotGame(third)
+  statusData.value = {
+    status: 0,
+    result: {
+      urlInfo: '',
+    },
+    desc: '',
+    errorDetail: null
+  }
 }
 
 const fcGetImage = <T extends InterSlotImage>(imagePath: T, id: T) => {
     try {
         return new URL(`/src/assets/img/${imagePath}/${id}.jpg`, import.meta.url).href
     } catch (error) {
-       console.log(error)   
+       console.log(error)
     }
 
 }
@@ -73,41 +102,59 @@ const fcSwitchEnterParam = (game:string) => {
     return data
 }
 const fcOpenGame = async (game:any) => {
-  const token = localStorage.getItem('userToken')
-  if(!token) {
-    ElNotification({
-      title: '提示',
-      message: '請先登入',
-      type: 'error'
-    },)
-    return
-  }
+  try {
+    const token = localStorage.getItem('userToken')
+    if(!token) {
+      ElNotification({
+        title: '提示',
+        message: '請先登入',
+        type: 'error'
+      },)
+      return
+    }
     const param = {
-        device:  'DESKTOP',
-        lang: locale.value,
-        lobbyURL: `${window.location.origin}/close`,
-        gameCode: game.id,
+      device:  'DESKTOP',
+      lang: locale.value,
+      lobbyURL: `${window.location.origin}/close`,
+      gameCode: game.id,
     };
 
-    const result = await enterGameApi(fcSwitchEnterParam(game.imagePath), param);
+    const result:any = await enterGameApi(fcSwitchEnterParam(game.imagePath), param);
+    console.log(result)
     if (result.status === 1) {
-        window.open(result.result.urlInfo);
-        
+      const  {urlInfo} = result.result
+      window.open(urlInfo);
     }
     statusData.value = result
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
 };
 </script>
 
 <style scoped lang="scss">
+.game-wrap{
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: flex-start;
+    height: 450px;
+}
+
 .club-btn{
     margin-bottom: 20px;
 }
 .el-card{
     cursor: pointer;
+    margin: 10px;
+  &:hover{
+    background-color: #409eff;
+  }
 }
-.status{
-    width:300px;
-    margin-top:15px;
-    word-wrap: break-word
+
+:deep(.el-result){
+    width: 300px;
+  .el-result__subtitle{
+    width: 80%;
+  }
 }
 </style>

@@ -3,5 +3,6 @@ export interface InterCreateImage {
 }
 
 export interface InterSlotImage {
-    (imagePath: any, id: string): any
+    (imagePath: any, id: any): any
 }
+

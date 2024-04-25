@@ -1,6 +1,6 @@
 import {request} from '../index'
 import {byJwtrequest} from '../byjwtindex'
-import {IPromotionListParam, ITableListParam, IServerIdParam, ISlotGameParam, ITableGameParam} from '@/vite/api'
+import {IPromotionListParam, ITableListParam, IServerIdParam, ITableGameParam} from '@/vite/api'
 import {AxiosResponse} from "axios";
 
 /**
@@ -8,7 +8,7 @@ import {AxiosResponse} from "axios";
  * @param {ISlotGameParam} param - 與請求一起發送的數據。
  * @returns {Promise<any>} 解析為GET請求響應的Promise。
  */
-export const getSlotGameApi = (param: ISlotGameParam) :Promise<AxiosResponse<any>> => {
+export const getSlotGameApi = (param: string) :Promise<AxiosResponse<any>> => {
     return request({
         url: `/webCache/GetSlotGame${param}List`,
         method: 'get',

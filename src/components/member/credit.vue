@@ -33,6 +33,7 @@ const fcGetBalance = async (): Promise<void> => {
         message: '獲取餘額成功',
         type: 'success'
       },)
+      time.value = 5
     }
     else{
       ElNotification({
@@ -40,10 +41,9 @@ const fcGetBalance = async (): Promise<void> => {
         message: '獲取餘額失敗',
         type: 'error'
       },)
-      fcCountDown(10)
+      fcCountDown(5)
     }
   }
-
 }
 
 let time:Ref<number> = ref(10)
@@ -71,8 +71,6 @@ const fcStep = (timestamp: number) => {
     requestAnimationFrame(fcStep);
   }
 }
-
-
 </script>
 <style scoped lang="scss">
 .credit-wrap{

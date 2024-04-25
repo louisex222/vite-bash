@@ -18,6 +18,7 @@ const fcSubmitLogout =  async(): Promise<void> => {
             type: 'success'
         })
         localStorage.removeItem('userToken')
+        localStorage.removeItem('userInfo')
         router.push({path: '/'})
     }
 }
