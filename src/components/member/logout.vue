@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { logoutApi } from '@/service/member/index'
+import { logoutApi } from '@/service/member'
 import { useRouter } from 'vue-router'
 import { ElNotification } from 'element-plus'
 const router = useRouter()
