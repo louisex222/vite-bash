@@ -15,10 +15,6 @@ export interface IClub{
     name: string,
 }
 
-export interface IClubList {
-    thirdPartyId: string,
-    games: ISlotGame[]
-}
 export interface  IDataversion {
     active: boolean,
     autopilot:  number,
