@@ -56,7 +56,7 @@ const fcSwitchServer = (serverId : IClub) =>{
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .server-wrap{
   display: flex;
   flex-wrap: wrap;
