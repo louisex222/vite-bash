@@ -48,7 +48,7 @@ const statusData :Ref<TstatusData> =ref({
   errorDetail: null
 })
 
-const fcGetLotteryGame = async (thirdPartyId: string): Promise<void> => {
+const fcGetLotteryGame = async (): Promise<void> => {
     const param: ITableListParam = {
         gameType: 6,
     }
@@ -113,7 +113,7 @@ const fcEnterGame = async (game: any) => {``
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .game-wrap{
   display: flex;
   flex-wrap: wrap;
