@@ -1,6 +1,6 @@
 <template>
         <el-button type="primary" plain v-for="(item, index) in clubList" :key="index"
-            @click="fcSwitchClub(item.thirdPartyId)" class="club-btn">
+            @click="fcSwitchClub()" class="club-btn">
             {{ item.thirdPartyId }}
         </el-button>
       <el-result
@@ -64,7 +64,7 @@ const fcGetLotteryGame = async (): Promise<void> => {
         })
     }
 }
-fcGetLotteryGame('EG')
+fcGetLotteryGame()
 const fcGetClubList = async (): Promise<void> => {
     const res: any = await getClubListApi()
 
@@ -76,8 +76,8 @@ const fcGetClubList = async (): Promise<void> => {
     }
 }
 fcGetClubList()
-const fcSwitchClub = async (thirdPartyId: string): Promise<void> => {
-    await fcGetLotteryGame(thirdPartyId)
+const fcSwitchClub = async (): Promise<void> => {
+    await fcGetLotteryGame()
   statusData.value = {
     status: 0,
     result: {
