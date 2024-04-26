@@ -55,7 +55,7 @@
   },
   "packageManager": "yarn@4.0.1",
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,jsx,ts,tsx,vue}": [
       "yarn  lint"
     ],
     "*.{css,scss}": [
