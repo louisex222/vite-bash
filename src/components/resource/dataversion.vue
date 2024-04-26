@@ -1,11 +1,19 @@
 <template>
     <div>
         <el-table :data="dataversion.dataList.value" style="width: 1200px;height: 700px" scrollbar-always-on stripe border>
-            <el-table-column prop="id" label="id" width="100" />
-            <el-table-column prop="code" label="code" width="250" />
-            <el-table-column prop="version" label="version" />
-            <el-table-column prop="active" label="active" />
-            <el-table-column prop="autopilot" label="autopilot" />
+            <el-table-column prop="id" :label="$t('id')" width="100" />
+            <el-table-column prop="code" :label="$t('code')" width="250" />
+            <el-table-column prop="version" :label="$t('version')" />
+          <el-table-column prop="active" :label="$t('active')" width="250" >
+            <template #default="scope">
+              <el-tag :type="scope.row.active === true? 'success' : 'danger'">{{ scope.row.active ===true ? '啟用':'停用'  }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column prop="autopilot" :label="$t('active')" width="250" >
+            <template #default="scope">
+              <el-tag :type="scope.row.autopilot === 1? 'success' : 'danger'">{{ scope.row.autopilot ===1 ? '啟用':'停用'  }}</el-tag>
+            </template>
+          </el-table-column>
         </el-table>
     </div>
 </template>

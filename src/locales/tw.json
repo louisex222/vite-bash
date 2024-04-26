@@ -16,11 +16,14 @@
         "Club_id": "使用者ID",
         "PanZu": "線區",
         "OnlineTime": "上線時間",
-        "Active": "啟用狀態",
         "Lock": "鎖定",
         "DongJie_Flag": "凍結",
         "IMMEDIA_CANT_ENTRY": "遊戲未開放 請聯絡上線",
         "Guide_123": "您的帳號已經被停用，請聯絡經銷商！",
         "BALANCE_IS_REFRESHING": "餘額刷新中，請稍候",
-        "Request too fast!": "點擊太頻繁，請稍後再試"
+        "Request too fast!": "點擊太頻繁，請稍後再試",
+        "id": "序列號",
+        "code": "名稱",
+        "version": "版本號",
+        "active": "啟用狀態"
 }

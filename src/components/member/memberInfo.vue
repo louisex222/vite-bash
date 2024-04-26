@@ -5,7 +5,7 @@ import {Ref} from 'vue'
 const memberInfo :Ref<any> = ref([])
 const fcGetMemberInfo = async () => {
   const params = {
-    "account": "Datw0"
+    "account": "Aste00002"
   }
   const res = await getMemberInfoApi(params)
   if (res) {
@@ -22,7 +22,7 @@ fcGetMemberInfo()
 </script>
 
 <template>
- <div>
+ <div class="member-wrap">
    <el-table
        :data="memberInfo"
        style="width: 1200px;"
@@ -35,7 +35,7 @@ fcGetMemberInfo()
      <el-table-column prop="Club_id" :label="$t('Club_id')" width="250" />
      <el-table-column prop="PanZu" :label="$t('PanZu')" width="250" />
      <el-table-column prop="OnlineTime" :label="$t('OnlineTime')" width="250" />
-     <el-table-column prop="Active" :label="$t('Active')" width="250" >
+     <el-table-column prop="Active" :label="$t('active')" width="250" >
         <template #default="scope">
           <el-tag :type="scope.row.Active === 1? 'success' : 'danger'">{{ scope.row.Active ===1 ? '啟用':'停用'  }}</el-tag>
         </template>
@@ -54,6 +54,8 @@ fcGetMemberInfo()
  </div>
 </template>
 
-<style scoped>
-
+<style scoped lang="scss">
+  .member-wrap {
+  height: 500px;
+}
 </style>
