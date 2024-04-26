@@ -10,6 +10,16 @@ export interface ISlotGame {
     clubId : number,
     categoryIdList: number[],
 }
+export interface ICardGame {
+    name:string
+    id:any,
+    imagePath: any,
+    localizationCode :string,
+    sort:number,
+    clubId : number,
+    categoryIdList: number[],
+
+}
 export interface IClub{
     thirdPartyId: string,
     name: string,

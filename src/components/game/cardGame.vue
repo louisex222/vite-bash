@@ -1,38 +1,60 @@
 <template>
-    <div class=" game-wrap">
         <el-button type="primary" plain v-for="(item, index) in clubList" :key="index"
             @click="fcSwitchClub(item.thirdPartyId)" class="club-btn">
             {{ item.thirdPartyId }}
         </el-button>
-
-        <el-card style="width: 300px" shadow="always" v-for="(item, index) in gameList" :key="index"><template
-                #header>{{ item.imagePath }} : {{ item.name
-                }}
-            </template>
-            <img :src="fcGetImage(item.imagePath, item.id)" style="width: 100%" @click="fcOpenGame(item)" />
-        </el-card>
-        <div class="status">
-            {{ statusData }}
+      <el-result
+          v-if="statusData.status !== 0"
+          :icon="statusData.status === 1? 'success' : 'error'"
+          :title="$t(statusData.desc)"
+          :sub-title="statusData.errorDetail !== null ? $t(statusData.errorDetail) : '網址: ' + statusData.result.urlInfo"
+      >
+        <template #extra>
+          <el-button type="primary">{{statusData.status}}</el-button>
+        </template>
+      </el-result>
+    <div class=" game-wrap">
+      <el-card style="width: 300px"  shadow="always" v-for="(item, index) in gameList" :key="index" @click="fcOpenGame(item)">
+        <div>
+          {{ item.imagePath}} : {{ item.name }} {{item.id}}
         </div>
+      </el-card>
     </div>
 </template>
 
 <script setup lang="ts">
 import { getCardGameApi, getClubListApi, enterGameApi } from '@/service/game/detail'
-import { Game } from '@/vite/game'
+import { ICardGame ,IClub} from '@/vite/data'
 import { InterSlotImage } from '@/vite/homeInter'
+import {Ref} from "vue/dist/vue";
+import {ElNotification} from "element-plus";
 const { locale } = useI18n()
-const gameList: Ref<Game[]> = ref([])
-const clubList: Ref<any> = ref()
-const statusData: Ref<any> = ref()
-const fcGetSlotGame = async (thirdPartyId: string): Promise<void> => {
-    const res: any = await getCardGameApi(thirdPartyId)
+const gameList: Ref<ICardGame[]> = ref([])
+const clubList: Ref<IClub[]> = ref([])
+type TstatusData = {
+  status: number,
+  result: {
+    urlInfo:string
+  },
+  desc:string,
+  errorDetail: null | string
+}
+const statusData :Ref<TstatusData> =ref({
+  status: 0,
+  result: {
+    urlInfo: '',
+  },
+  desc: '',
+  errorDetail: null
+})
+const fcGetCardGame = async (third: string): Promise<void> => {
+    const res: any = await getCardGameApi(third)
     if (res) {
-        gameList.value = res.filter((item: Game, index: number) => index === 0)
+        gameList.value = res
         console.log(gameList.value)
     }
 }
-fcGetSlotGame('MT')
+fcGetCardGame('MT')
 
 const fcGetClubList = async (): Promise<void> => {
     const res: any = await getClubListApi()
@@ -45,8 +67,15 @@ const fcGetClubList = async (): Promise<void> => {
 }
 fcGetClubList()
 const fcSwitchClub = async (thirdPartyId: string): Promise<void> => {
-    fcGetSlotGame(thirdPartyId)
-    statusData.value = ''
+  await fcGetCardGame(thirdPartyId)
+  statusData.value = {
+    status: 0,
+    result: {
+      urlInfo: '',
+    },
+    desc: '',
+    errorDetail: null
+  }
 }
 
 const fcGetImage = <T extends InterSlotImage>(imagePath: T, id: T) => {
@@ -69,42 +98,61 @@ const fcSwitchEnterParam = (game: string) => {
     }
     return data
 }
-const fcOpenGame = async (game: any) => {
+const fcOpenGame = async (game:any) => {
+  try {
+    const token = localStorage.getItem('userToken')
+    if(!token) {
+      ElNotification({
+        title: '提示',
+        message: '請先登入',
+        type: 'error'
+      },)
+      return
+    }
     const param = {
-        device: 'DESKTOP',
-        lang: locale.value,
-        lobbyURL: `${window.location.origin}/close`,
-        gameCode: game.id,
+      device:  'DESKTOP',
+      lang: locale.value,
+      lobbyURL: `${window.location.origin}/close`,
+      gameCode: game.id,
     };
 
-    const result = await enterGameApi(fcSwitchEnterParam(game.imagePath), param);
+    const result:any = await enterGameApi(fcSwitchEnterParam(game.imagePath), param);
+    console.log(result)
     if (result.status === 1) {
-        window.open(result.result.urlInfo);
-
+      const  {urlInfo} = result.result
+      window.open(urlInfo);
     }
     statusData.value = result
+  } catch (error) {
+    console.error('An error occurred:', error);
+  }
 };
 </script>
 
 <style scoped lang="scss">
-.club-btn {
-    margin-bottom: 20px;
+.game-wrap{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  height: 450px;
 }
 
-.el-card {
-    cursor: pointer;
+.club-btn{
+  margin-bottom: 20px;
+}
+.el-card{
+  cursor: pointer;
+  margin: 10px;
+  &:hover{
+    background-color: #409eff;
+  }
 }
 
-.status {
-    width: 300px;
-    margin-top: 15px;
-    word-wrap: break-word
+:deep(.el-result){
+  width: 300px;
+  .el-result__subtitle{
+    width: 80%;
+  }
 }
 </style>
-<script setup lang="ts">
 
-</script>
-
-<style scoped>
-
-</style>
