@@ -25,5 +25,6 @@
         "id": "序列號",
         "code": "名稱",
         "version": "版本號",
-        "active": "啟用狀態"
+        "active": "啟用狀態",
+        "ForwardGameAsync fail | Get game url fail | Get game url fail": "遊戲網址錯誤"
 }

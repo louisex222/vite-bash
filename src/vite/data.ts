@@ -18,8 +18,17 @@ export interface ICardGame {
     sort:number,
     clubId : number,
     categoryIdList: number[],
-
 }
+export interface ITableGame {
+    name:string
+    id:any,
+    imagePath: any,
+    localizationCode :string,
+    sort:number,
+    clubId : number,
+    categoryIdList: number[],
+}
+
 export interface IClub{
     thirdPartyId: string,
     name: string,

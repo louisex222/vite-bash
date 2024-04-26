@@ -1,40 +1,60 @@
 <template>
-    <div class=" game-wrap">
         <el-button type="primary" plain v-for="(item, index) in clubList" :key="index"
             @click="fcSwitchClub(item.thirdPartyId)" class="club-btn">
             {{ item.thirdPartyId }}
         </el-button>
-
-        <el-card style="width: 300px" shadow="always" v-for="(item, index) in tableList" :key="index"><template
-                #header>{{ item.imagePath }} : {{ item.name
-                }}
-            </template>
-            <img :src="fcGetImage(item.thirdPartyId)" style="width: 100%" @click="fcEnterGame(item)" />
-        </el-card>
-        <div class="status">
-            {{ statusData }}
+      <el-result
+          v-if="statusData.status !== 0"
+          :icon="statusData.status === 1? 'success' : 'error'"
+          :title="$t(statusData.desc)"
+          :sub-title="statusData.errorDetail !== null ? $t(statusData.errorDetail) : '網址: ' + statusData.result.urlInfo"
+      >
+        <template #extra>
+          <el-button type="primary">{{statusData.status}}</el-button>
+        </template>
+      </el-result>
+    <div class=" game-wrap">
+      <el-card style="width: 300px"  shadow="always" v-for="(item, index) in tableList" :key="index" @click="fcEnterGame(item)">
+        <div>
+          {{ item.imagePath}} : {{ item.name }} {{item.id}}
         </div>
+      </el-card>
     </div>
 </template>
 
 <script setup lang="ts">
-import { getTableGameApi, getClubListApi, enterGameApi } from '@/service/game/detail'
+import {Ref} from 'vue'
+import { getGameTablesApi, getClubListApi, enterGameApi } from '@/service/game/detail'
 import { ElNotification } from 'element-plus'
-import { ITableList } from '@/vite/api';
+import { ITableListParam } from '@/vite/api';
+import {IClub,ITableGame} from '@/vite/data';
 const { locale } = useI18n()
-const tableList: Ref<any> = ref([])
-const clubList: Ref<any> = ref()
-const statusData: Ref<any> = ref()
-const fcGetTableGame = async (thirdPartyId:string): Promise<void> => {
-    const param: ITableList = {
+const tableList: Ref<ITableGame[]> = ref([])
+const clubList: Ref<IClub[]> = ref([])
+type TstatusData = {
+  status: number,
+  result: {
+    urlInfo:string
+  },
+  desc:string,
+  errorDetail: null | string
+}
+const statusData :Ref<TstatusData> =ref({
+  status: 0,
+  result: {
+    urlInfo: '',
+  },
+  desc: '',
+  errorDetail: null
+})
+const fcGetTableGame = async (third: string): Promise<void> => {
+    const param: ITableListParam = {
         gameType: 1,
     }
-    const result = await getTableGameApi(param)
+    const result:any = await getGameTablesApi(param)
     if (result) {
-        tableList.value = result
-            .filter((game: any, index: number) => game.thirdPartyId === thirdPartyId)
-            .slice(0,1)
-            
+        tableList.value = result.filter(game => game.thirdPartyId ===third )
+
     } else {
         ElNotification({
             title: 'Error',
@@ -56,8 +76,15 @@ const fcGetClubList = async (): Promise<void> => {
 }
 fcGetClubList()
 const fcSwitchClub = async (thirdPartyId: string): Promise<void> => {
-    fcGetTableGame(thirdPartyId)
-    statusData.value = ''
+   await fcGetTableGame(thirdPartyId)
+  statusData.value = {
+    status: 0,
+    result: {
+      urlInfo: '',
+    },
+    desc: '',
+    errorDetail: null
+  }
 }
 
 const fcGetImage = (thirdPartyId: string) => {
@@ -77,9 +104,10 @@ const fcEnterGame = async (game: any) => {
     };
     const apiKey = game.thirdPartyId === 'RCG' ? 'W1RCGv3' : 'WMLiveV2'
     try {
-        const result = await enterGameApi(apiKey, param);
+        const result :any = await enterGameApi(apiKey, param);
         if (result.status === 1) {
-            window.open(result.result.urlInfo);
+          const  {urlInfo} = result.result
+          window.open(urlInfo);
         }
         statusData.value = result
     }
@@ -90,7 +118,28 @@ const fcEnterGame = async (game: any) => {
 </script>
 
 <style scoped>
+.game-wrap{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  height: 450px;
+}
+
 .club-btn{
-    margin-bottom: 20px
+  margin-bottom: 20px;
+}
+.el-card{
+  cursor: pointer;
+  margin: 10px;
+  &:hover{
+    background-color: #409eff;
+  }
+}
+
+:deep(.el-result){
+  width: 300px;
+  .el-result__subtitle{
+    width: 80%;
+  }
 }
 </style>
