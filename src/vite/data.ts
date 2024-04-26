@@ -28,7 +28,16 @@ export interface ITableGame {
     clubId : number,
     categoryIdList: number[],
 }
-
+export interface ILotteryGame {
+    name:string
+    id:any,
+    imagePath: any,
+    localizationCode :string,
+    sort:number,
+    clubId : number,
+    categoryIdList: number[],
+    desk:   string,
+}
 export interface IClub{
     thirdPartyId: string,
     name: string,
