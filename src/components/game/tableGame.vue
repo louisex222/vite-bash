@@ -117,7 +117,7 @@ const fcEnterGame = async (game: any) => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .game-wrap{
   display: flex;
   flex-wrap: wrap;
