@@ -66,4 +66,7 @@ export interface IFrom {
     username:string,
     password: string,
 }
+export interface IMemberInfo {
+
+}
 

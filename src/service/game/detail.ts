@@ -101,3 +101,4 @@ export const getServerIdApi = (param:IServerIdParam): Promise<AxiosResponse<any>
         data: param
     })
 }
+

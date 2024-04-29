@@ -1,14 +1,21 @@
 <script setup lang="ts">
 import {getMemberInfoApi} from "@/service/member";
 import { ElNotification } from 'element-plus'
+import {
+  Search,
+} from '@element-plus/icons-vue'
+import axios from 'axios'
 import {Ref} from 'vue'
 const memberInfo :Ref<any> = ref([])
+const input = ref('')
+const cachedMemberInfo:Ref<any[]>  = ref([])
 const fcGetMemberInfo = async () => {
   const params = {
-    "account": "Aste00002"
+    "account": input.value
   }
-  const res = await getMemberInfoApi(params)
+  const res:any = await getMemberInfoApi(params)
   if (res) {
+    cachedMemberInfo.value = res
     memberInfo.value = res
     ElNotification({
       title: '成功',
@@ -18,11 +25,20 @@ const fcGetMemberInfo = async () => {
   }
   console.log(res)
 }
-fcGetMemberInfo()
+
+
+const fcSearchMember = async () => {
+   if(input.value){
+     await fcGetMemberInfo()
+     memberInfo.value = cachedMemberInfo.value.filter((item:any) => item.Club_Ename.includes(input.value))
+   }
+}
 </script>
 
 <template>
  <div class="member-wrap">
+   <el-input v-model="input" style="width: 240px" placeholder="Please input"  />
+   <el-button :icon="Search" circle @click="fcSearchMember" />
    <el-table
        :data="memberInfo"
        style="width: 1200px;"
@@ -58,4 +74,9 @@ fcGetMemberInfo()
   .member-wrap {
   height: 500px;
 }
+  .el-table {
+    margin-top: 20px;
+  }
+
+
 </style>
