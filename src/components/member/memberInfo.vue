@@ -4,7 +4,6 @@ import { ElNotification } from 'element-plus'
 import {
   Search,
 } from '@element-plus/icons-vue'
-import axios from 'axios'
 import {Ref} from 'vue'
 const memberInfo :Ref<any> = ref([])
 const input = ref('')
