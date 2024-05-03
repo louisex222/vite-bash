@@ -33,7 +33,7 @@ const fcMoveRouter =  (value: string): void => {
     router.push({ path: value })
 }
 const routerList:any = computed(() => {
-    return (router.options.routes[1].children ?? []).filter((item, index) => item.name !== 'home')
+    return (router.options.routes[1].children ?? []).filter((item) => item.name !== 'home')
 })
 
 </script>

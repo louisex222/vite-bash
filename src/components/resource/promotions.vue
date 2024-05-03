@@ -104,7 +104,7 @@ const fcNextStep = () => {
 
 
 const fcMouseEvent = (event:any)=>{
-
+  console.log(event)
 }
 
 </script>
