@@ -15,7 +15,6 @@ const fcGetClubList = async (): Promise<void> => {
         .sort((a:any,b:any)=> a.sort - b.sort)
 
   }
-  console.log('clubList', clubList.value)
 }
 fcGetClubList()
 
@@ -23,14 +22,13 @@ const fcGetServerId = async (clubId : IClub) => {
   const param : IServerIdParam = {
     thirdParty_id: clubId.thirdPartyId
   }
-  console.log('param', param)
   const res: any = await getServerIdApi(param)
   try{
     if(res){
       serverId.value = res[0]['Server_id']
     }
-  } catch(e) {
-    console.log(e)
+  } catch(error) {
+    console.log(error)
   }
 
 }

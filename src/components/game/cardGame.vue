@@ -51,7 +51,6 @@ const fcGetCardGame = async (third: string): Promise<void> => {
     const res: any = await getCardGameApi(third)
     if (res) {
         gameList.value = res
-        console.log(gameList.value)
     }
 }
 fcGetCardGame('MT')
@@ -117,7 +116,6 @@ const fcOpenGame = async (game:any) => {
     };
 
     const result:any = await enterGameApi(fcSwitchEnterParam(game.imagePath), param);
-    console.log(result)
     if (result.status === 1) {
       const  {urlInfo} = result.result
       window.open(urlInfo);

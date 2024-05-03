@@ -19,7 +19,6 @@
 import { useRouter} from 'vue-router'
 const activeNames = ref(['1'])
 const router = useRouter()
-console.log(router.options.routes[1].children)
 const handleChange = (val: string[]) => {
   console.log(val)
 }
@@ -33,7 +32,6 @@ defineProps({
 const fcMoveRouter =  (value: string): void => {
     router.push({ path: value })
 }
-console.log(router.options)
 const routerList:any = computed(() => {
     return (router.options.routes[1].children ?? []).filter((item, index) => item.name !== 'home')
 })

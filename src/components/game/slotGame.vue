@@ -52,7 +52,6 @@ const fcGetSlotGame = async (third: string): Promise<void> => {
     const res :any = await getSlotGameApi(third)
     if(res){
         gameList.value = res
-        console.log(gameList.value)
     }
 }
 fcGetSlotGame('Royal')
@@ -120,7 +119,6 @@ const fcOpenGame = async (game:any) => {
     };
 
     const result:any = await enterGameApi(fcSwitchEnterParam(game.imagePath), param);
-    console.log(result)
     if (result.status === 1) {
       const  {urlInfo} = result.result
       window.open(urlInfo);

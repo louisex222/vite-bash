@@ -1,16 +1,20 @@
 <template>
-  <div></div>
+  <div>
+
+  </div>
 </template>
 
 <script lang="ts" setup>
-import {getHealthCheck} from '@/service/type/healthCheck';
-const fcGetHealthCheck = async (): Promise<void> => {
-  const res: any = await getHealthCheck()
 
-}
-
-fcGetHealthCheck()
 </script>
 
 <style scoped lang="scss">
+.el-alert {
+  width:50%;
+  margin: 20px 20px 0 0 ;
+}
+.el-alert:first-child {
+  //margin: 0;
+}
+
 </style>

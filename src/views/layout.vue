@@ -4,7 +4,7 @@
     </el-aside>
     <el-container :class="{ 'isOpen': isOpen === true }">
       <el-header>
-        <Header></Header>
+        <Header ></Header>
       </el-header>
       <el-main>
         <RouterView />
@@ -13,13 +13,30 @@
   </el-container>
 </template>
 <script setup lang="ts">
+import {Ref} from 'vue'
 import Header from '@/components/header.vue'
 import Aside from '@/components/asideCom.vue'
 import { useI18n } from 'vue-i18n'
+import {useStore} from 'vuex'
 const { locale } = useI18n()
+const store = useStore()
+import {getHealthCheck} from '@/service/type/healthCheck';
 localStorage.setItem('locale', locale.value)
-const isOpen: Ref<any> = ref(true)
+const isOpen: Ref<boolean | undefined> = ref(false)
+const healthFlag: Ref<boolean> = ref(false)
 provide('isOpen', isOpen)
+const fcGetHealthCheck = async (): Promise<void> => {
+   const res :any = await getHealthCheck()
+  healthFlag.value =  res['isDbHealthy'][0]['state_desc'] === 'ONLINE' && res['isRedisHealthy'] === 'PONG';
+   store.commit('setHealthFlag', healthFlag.value)
+}
+fcGetHealthCheck();
+const timer = setInterval(() => {
+  fcGetHealthCheck()
+}, 1000 * 60)
+onBeforeUnmount(() => {
+  clearInterval(timer)
+})
 </script>
 <style scoped lang="scss">
 .el-container {
@@ -29,7 +46,7 @@ provide('isOpen', isOpen)
   transition: 0.5s ease;
 
   &.isOpen {
-    left: 0px;
+    left: 0;
     transition: 0.5s ease;
   }
 }

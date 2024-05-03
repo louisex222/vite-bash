@@ -9,7 +9,6 @@ const dynamicRouter: Array<routerInter> = [
     'home',
     'loginView',
     'logoutView',
-    'changePasswordView',
     'memberInfoView',
     'creditView',
     'dataVersionView',

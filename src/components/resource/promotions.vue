@@ -4,16 +4,21 @@
     <button @click="fcPreStep" style="margin-right:10px">上一步</button>
     <button @click="fcNextStep" style="margin-right:10px">下一步</button>
     <button>異教徒模式</button>
-    <VueDraggable v-model="promotionDataList
-" class="list-group" @end="onEnd">
-        <li v-for="(item , index) in promotionDataList
-" :key="index" class="cursor-move">
-            <p>{{index}} : {{ item.eventNewsID}}</p>
-            <img :src="item.eventNewsImgUrl" alt="">
+    <VueDraggable
+      v-model="promotionDataList"
+      class="list-group" @end="onEnd"
+    >
+        <li
+          v-for="(item , index) in promotionDataList"
+          :key="index"
+          class="cursor-move"
+          @mousemove="fcMouseEvent($event)"
+        >
+          <p>{{index}} : {{ item.eventNewsID}}</p>
+          <img :src="item.eventNewsImgUrl" alt="">
         </li>
     </VueDraggable>
-    <div class="wall">{{ promotionComputed }}
-    </div>
+    <div class="wall">{{ promotionComputed }}</div>
 </template>
 
 <script setup lang="ts">
@@ -21,10 +26,9 @@ import { getPromotionListApi } from '@/service/game/detail'
 import { ElNotification } from 'element-plus';
 import { VueDraggable } from 'vue-draggable-plus'
 import { useStore } from 'vuex';
-import eventNew from '@/data/eventNew.json'
 import {Ref} from 'vue'
 import {IPromotionData} from "@/vite/data";
-const { locale } = useI18n()  
+const { locale } = useI18n()
 const  store  = useStore()
 const promotionDataList: Ref<IPromotionData[]> = ref([])
 const promotionComputed = computed<object[]>(() => {
@@ -48,7 +52,11 @@ const fcGetPromotion = async (): Promise<void> => {
             type: 'success'
         })
       const {result} = res
-      promotionDataList.value = result
+      promotionDataList.value = result.map((res:any)=>{
+        const {eventNewsImgUrl} = res;
+        res.eventNewsImgUrl = `https://picture.nlnlouo.site/${ eventNewsImgUrl}`
+        return res
+      })
         if (currentPromotion.value.length === 0) {
             store.commit('setCurrentPromotion', promotionDataList.value)
         }
@@ -63,7 +71,6 @@ const fcResetDataSort = () => {
 const onEnd = () => {
     store.commit('setCurrentPromotion', promotionDataList.value)
     currentStep.value += 1
-    console.log(currentStep.value)
 }
 const fcPreStep = () => {
     if (currentStep.value > 1) {
@@ -77,7 +84,6 @@ const fcPreStep = () => {
             })
         }
         promotionDataList.value = <IPromotionData[]>currentPromotion.value[currentStep.value - 1]
-        console.log(currentStep.value, promotionDataList.value)
     }
 }
 const fcNextStep = () => {
@@ -95,20 +101,12 @@ const fcNextStep = () => {
 
     }
 }
-const mixList :Ref<any> = ref({})
-const firstEvent :Ref<any>= ref( eventNew[0])
-const newEventList = computed<object[]>(() => {
-  eventNew
-        .slice(1)
-        .forEach(([...args]) => {
-            args.forEach((element, index) => {
-                const key = firstEvent.value[index]
-                mixList.value[key] = element
-            })
-        })
-    return mixList.value
-})
-console.log(newEventList.value)
+
+
+const fcMouseEvent = (event:any)=>{
+
+}
+
 </script>
 
 <style scoped lang="scss">
@@ -132,6 +130,6 @@ console.log(newEventList.value)
     top: 130px;
     width: 380px;
     height: 700px;
-}   
+}
 
 </style>

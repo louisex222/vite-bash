@@ -2,12 +2,14 @@ import { createStore, Store, useStore as allStore } from 'vuex'
 
 export interface State {
     count: number,
-    currentPromotion: Array<object>
+    currentPromotion: Array<object>,
+    healthFlag: boolean
 }
 const store = createStore<State>({
     state: {
         count: 0,
-        currentPromotion: []
+        currentPromotion: [],
+        healthFlag: false
     },
     getters: {
         count(state) {
@@ -15,6 +17,9 @@ const store = createStore<State>({
         },
         currentPromotion(state) {
             return state.currentPromotion
+        },
+        healthFlag(state) {
+            return state.healthFlag
         }
     },
     mutations: {
@@ -27,6 +32,9 @@ const store = createStore<State>({
         clearCurrentPromotion(state) {
             state.currentPromotion = []
         },
+        setHealthFlag(state, data) {
+            state.healthFlag = data
+        }
     }
 })
 export function useStore(): Store<State> {
