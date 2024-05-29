@@ -96,9 +96,32 @@ export const getGameTablesApi = (param: ITableListParam): Promise<AxiosResponse<
  */
 export const getServerIdApi = (param:IServerIdParam): Promise<AxiosResponse<any>> => {
     return request({
-        url: `http://10.20.37.26:8000/api/game/ServerId`,
+        url: `http://192.168.196.134:8000/api/game/ServerId`,
         method: 'post',
         data: param
     })
 }
 
+export  const getGameRecordApi = (param:any) : Promise<AxiosResponse<any>> =>{
+    return byJwtrequest({
+        url: '/api/Report/GameRecord2',
+        method: 'post',
+        data: param
+    })
+}
+
+export const getTimeRangeApi = ():Promise<AxiosResponse<any>> => {
+    return byJwtrequest({
+        url: '/api/Utils/TimeRange',
+        method: 'post',
+        data: {}
+    })
+}
+
+export const getReportStatusCheckApi = ():Promise<AxiosResponse<any>> => {
+    return request({
+        url: 'http://192.168.196.134:8000/api/Game/ReportStatusCheck',
+        method: 'get',
+        data: {}
+    })
+}

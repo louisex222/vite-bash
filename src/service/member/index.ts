@@ -63,8 +63,16 @@ export const getBalanceApi = (): Promise<AxiosResponse<any>> =>{
  */
 export const getMemberInfoApi = (data:IMemberInfoParam): Promise<AxiosResponse<any>> => {
     return request({
-        url: 'http://10.20.37.26:8000/api/Member/userInfo',
+        url: 'http://192.168.196.134:8000/api/Member/userInfo',
         method: 'post',
         data
+    })
+}
+
+export const getUpdateMemberStatusApi = (param:any):Promise <AxiosResponse<any>> =>{
+    return byJwtrequest({
+        url: '/api/Member/UpdateMemberStatus',
+        method: 'post',
+        data: param
     })
 }

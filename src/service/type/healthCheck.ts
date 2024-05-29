@@ -7,9 +7,17 @@ import {AxiosResponse} from 'axios'
  */
 export const getHealthCheck = ():Promise<AxiosResponse<any>> =>{
     return request({
-        url: 'http://10.20.37.26:8000/api/Game/HealthCheck',
+        url: 'http://192.168.196.134:8000/api/Game/HealthCheck',
         method: 'get',
         data: {}
     })
 }
 
+
+export const getReportStatusCheck = ():Promise<AxiosResponse<any>> =>{
+    return request({
+        url: 'http://192.168.196.134:8000//api/Game/ReportStatusCheck',
+        method: 'get',
+        data: {}
+    })
+}

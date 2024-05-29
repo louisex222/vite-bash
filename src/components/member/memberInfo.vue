@@ -7,14 +7,13 @@ import {
 import {Ref} from 'vue'
 const memberInfo :Ref<any> = ref([])
 const input = ref('')
-const cachedMemberInfo:Ref<any[]>  = ref([])
+
 const fcGetMemberInfo = async () => {
   const params = {
     "account": input.value
   }
   const res:any = await getMemberInfoApi(params)
   if (res) {
-    cachedMemberInfo.value = res
     memberInfo.value = res
     ElNotification({
       title: '成功',
@@ -29,7 +28,6 @@ const fcGetMemberInfo = async () => {
 const fcSearchMember = async () => {
    if(input.value){
      await fcGetMemberInfo()
-     memberInfo.value = cachedMemberInfo.value.filter((item:any) => item.Club_Ename.includes(input.value))
    }
 }
 </script>

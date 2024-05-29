@@ -26,5 +26,15 @@
         "code": "名稱",
         "version": "版本號",
         "active": "啟用狀態",
-        "ForwardGameAsync fail | Get game url fail | Get game url fail": "遊戲網址錯誤"
+        "ForwardGameAsync fail | Get game url fail | Get game url fail": "遊戲網址錯誤",
+        "reportView": "報表",
+        "stake_Score": "金額",
+        "yaMa": "實投量",
+        "account_Score": "輸贏",
+        "tuiSui": "退水",
+        "club_AScore": "結果",
+        "jackpot_Score": "彩金",
+        "club_Ename": "使用者名稱",
+        "game_id": "遊戲ID",
+        "datetime": "遊戲時間"
 }
