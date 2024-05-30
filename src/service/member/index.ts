@@ -71,7 +71,7 @@ export const getMemberInfoApi = (data:IMemberInfoParam): Promise<AxiosResponse<a
 
 export const getUpdateMemberStatusApi = (param:any):Promise <AxiosResponse<any>> =>{
     return byJwtrequest({
-        url: '/api/Member/UpdateMemberStatus',
+        url: 'http://192.168.196.134:8000/api/Member/UpdateMemberStatus',
         method: 'post',
         data: param
     })

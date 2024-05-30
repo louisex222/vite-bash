@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {getMemberInfoApi} from "@/service/member";
+import {getUpdateMemberStatusApi} from "@/service/member";
 import { ElNotification } from 'element-plus'
 import {
   Search,
@@ -7,7 +8,11 @@ import {
 import {Ref} from 'vue'
 const memberInfo :Ref<any> = ref([])
 const input = ref('')
-
+const updateList :Ref<any> = ref({
+  fieldName: '',
+  status:"",
+  clubId: '2005161782'
+})
 const fcGetMemberInfo = async () => {
   const params = {
     "account": input.value
@@ -30,6 +35,25 @@ const fcSearchMember = async () => {
      await fcGetMemberInfo()
    }
 }
+const fcUpdateMemberStatus = async()=>{
+  const param :any ={
+    field_name: updateList.value.fieldName,
+    status: updateList.value.status,
+    club_id: updateList.value.clubId,
+
+  }
+  const res:any = await getUpdateMemberStatusApi(param)
+  if (res) {
+    console.log(res)
+    ElNotification({
+      title: '成功',
+      message: '獲取會員資料成功',
+      type:'success'
+    })
+  }
+
+}
+
 </script>
 
 <template>
@@ -38,7 +62,7 @@ const fcSearchMember = async () => {
    <el-button :icon="Search" circle @click="fcSearchMember" />
    <el-table
        :data="memberInfo"
-       style="width: 1200px;"
+       style="width: 1200px; margin-bottom: 20px"
        scrollbar-always-on
        stripe
        border
@@ -47,6 +71,7 @@ const fcSearchMember = async () => {
      <el-table-column prop="Club_Ename" :label="$t('Club_Ename')" width="150" sortable  />
      <el-table-column prop="Club_id" :label="$t('Club_id')" width="250" />
      <el-table-column prop="PanZu" :label="$t('PanZu')" width="250" />
+      <el-table-column prop="Now_XinYong" :label="$t('Now_XinYong')" width="250" />
      <el-table-column prop="OnlineTime" :label="$t('OnlineTime')" width="250" />
      <el-table-column prop="Active" :label="$t('active')" width="250" >
         <template #default="scope">
@@ -64,6 +89,22 @@ const fcSearchMember = async () => {
        </template>
      </el-table-column>
    </el-table>
+   <el-select v-model="updateList.fieldName"  style="width: 240px">
+      <el-option label="Active" value="Active"></el-option>
+      <el-option label="Lock" value="Lock"></el-option>
+      <el-option label="DongJie_Flag" value="DongJie_Flag"></el-option>
+      <el-option label="Now_XinYong" value="Now_XinYong"></el-option>
+   </el-select>
+   <el-select v-model="updateList.clubId" style="width: 240px">
+     <el-option label="Datw01" value="2005161771"></el-option>
+     <el-option label="Datw05" value="2005161782"></el-option>
+   </el-select>
+   <el-select v-model="updateList.status" v-if="updateList.fieldName === 'Active' || updateList.fieldName === 'Lock' || updateList.fieldName === 'DongJie_Flag'" style="width: 240px">
+     <el-option  label="啟用" value="1"></el-option>
+     <el-option label="停用" value="0"></el-option>
+   </el-select>
+   <el-input v-else  v-model="updateList.status" style="width: 240px"  placeholder="Please input"  />
+   <el-button @click="fcUpdateMemberStatus">更改帳號內容</el-button>
  </div>
 </template>
 

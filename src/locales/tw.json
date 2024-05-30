@@ -36,5 +36,6 @@
         "jackpot_Score": "彩金",
         "club_Ename": "使用者名稱",
         "game_id": "遊戲ID",
-        "datetime": "遊戲時間"
+        "datetime": "遊戲時間",
+        "Now_XinYong":"錢包"
 }

@@ -135,7 +135,13 @@ console.log(timeRange)
     <h1>Report View</h1>
     <el-row :gutter="16">
       <el-col :span="2">
-        <input type="text" v-model="formList.date"  @change="fcInputChange(formList.date)">
+        <el-select v-model="formList.date" @change="fcInputChange(formList.date)">
+          <el-option label="today" value="today"></el-option>
+          <el-option label="thisWeek" value="thisWeek"></el-option>
+          <el-option label="lastWeek" value="lastWeek"></el-option>
+          <el-option label="thisMonth" value="thisMonth"></el-option>
+          <el-option label="lastMonth" value="lastMonth"></el-option>
+        </el-select>
       </el-col>
       <el-col :span="2"><input type="text" v-model="formList.dateStart"></el-col>
       <el-col :span="2"><input type="text" v-model="formList.dateEnd"></el-col>
