@@ -123,8 +123,7 @@ const fcInputChange = (value:string)=> {
     }
 }
 const fcGetReportStatusCheck = async ()=>{
-  const res:any = await getReportStatusCheckApi()
-  allReport.value = res
+  allReport.value = await getReportStatusCheckApi()
 }
 fcGetReportStatusCheck()
 console.log(timeRange)
