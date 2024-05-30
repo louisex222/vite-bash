@@ -9,7 +9,7 @@
               <el-tag :type="scope.row.active === true? 'success' : 'danger'">{{ scope.row.active ===true ? '啟用':'停用'  }}</el-tag>
             </template>
           </el-table-column>
-          <el-table-column prop="autopilot" :label="$t('active')" width="250" >
+          <el-table-column prop="autopilot" :label="$t('autopilot')" width="250" >
             <template #default="scope">
               <el-tag :type="scope.row.autopilot === 1? 'success' : 'danger'">{{ scope.row.autopilot ===1 ? '啟用':'停用'  }}</el-tag>
             </template>
