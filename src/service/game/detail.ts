@@ -125,3 +125,11 @@ export const getReportStatusCheckApi = ():Promise<AxiosResponse<any>> => {
         data: {}
     })
 }
+
+export const getHistoryApi = (param:any):Promise<AxiosResponse<any>> => {
+    return byJwtrequest({
+        url: '/api/Report/GameRecord2',
+        method: 'post',
+        data: param
+    })
+}

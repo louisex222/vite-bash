@@ -11,7 +11,7 @@ const input = ref('')
 const updateList :Ref<any> = ref({
   fieldName: '',
   status:"",
-  clubId: '2005161782'
+  clubId: ''
 })
 const fcGetMemberInfo = async () => {
   const params = {
@@ -31,9 +31,9 @@ const fcGetMemberInfo = async () => {
 
 
 const fcSearchMember = async () => {
-   if(input.value){
+
      await fcGetMemberInfo()
-   }
+
 }
 const fcUpdateMemberStatus = async()=>{
   const param :any ={
