@@ -19,8 +19,7 @@ const clubList: Ref<IClub[]> = ref([])
     const param:any = {
       thirdParty_id: clubValue.value
     }
-    const res = await getAllGameCheckApi(param);
-    allGameList.value = res
+    allGameList.value = await getAllGameCheckApi(param);
   }
   const fcGetClubList = async (): Promise<void> => {
     const res: any = await getClubListApi()

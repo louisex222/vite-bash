@@ -12,7 +12,6 @@
           v-for="(item , index) in promotionDataList"
           :key="index"
           class="cursor-move"
-          @mousemove="fcMouseEvent($event)"
         >
           <p>{{index}} : {{ item.eventNewsID}}</p>
           <img :src="item.eventNewsImgUrl" alt="">
@@ -103,9 +102,7 @@ const fcNextStep = () => {
 }
 
 
-const fcMouseEvent = (event:any)=>{
 
-}
 
 </script>
 
