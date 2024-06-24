@@ -12,12 +12,19 @@ export const getHealthCheck = ():Promise<AxiosResponse<any>> =>{
         data: {}
     })
 }
-
-
-export const getReportStatusCheck = ():Promise<AxiosResponse<any>> =>{
+interface IRequest {
+    url: string;
+    method: string;
+    data: any;
+    headers?: {
+        [key: string]: string;
+    };
+}
+export const getAllGameCheckApi = (param:any):Promise<AxiosResponse<IRequest>> => {
     return request({
-        url: 'http://192.168.196.134:8000//api/Game/ReportStatusCheck',
-        method: 'get',
-        data: {}
+        url: 'http://192.168.196.134:8000/api/Game/GetGameToken',
+        method: 'post',
+        data: param,
     })
 }
+

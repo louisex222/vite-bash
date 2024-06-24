@@ -41,10 +41,15 @@ const userConfig = defineConfig({
     strictPort: false, //設為true時端口被佔用則直接退出，不會嘗試下一個可用端口
     open: true, //服務啟動時自動在瀏覽器中打開應用
     proxy: {   // 反向代理配置
-      '^/api': {
-        target: 'http://localhost:3001/api',
+      // '^/api': {
+      //   target: 'http://localhost:3001/api',
+      //   changeOrigin: true,
+      //   rewrite: (path) => path.replace(/^\/api/, '')
+      // },
+      '^/api':{
+        target:'ws://http://192.168.196.134:8000/',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        ws: true,
       }
     }
   },

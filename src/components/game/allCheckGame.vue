@@ -1,0 +1,73 @@
+<script setup lang="ts">
+  import {getAllGameCheckApi} from "@/service/type/healthCheck";
+  import {getClubListApi} from '@/service/game/detail'
+  import  {IClub} from '@/vite/data'
+  import {Ref} from "vue";
+  // const
+  interface IAllGameList {
+    clubename: string,
+    id: string,
+    desc: string,
+    result: {
+      urlInfo: string
+    }
+  }
+  const allGameList :Ref<IAllGameList[]> = ref([]);
+const clubList: Ref<IClub[]> = ref([])
+  const clubValue :Ref<string> = ref('')
+  const fcCheckGame = async () => {
+    const param:any = {
+      thirdParty_id: clubValue.value
+    }
+    const res = await getAllGameCheckApi(param);
+    allGameList.value = res
+  }
+  const fcGetClubList = async (): Promise<void> => {
+    const res: any = await getClubListApi()
+    const excludedClub = ['Favorites', 'MobileHot','Golden']
+
+    if (res) {
+      clubList.value = res
+      .filter((item?: any) => item.gameType === 3 && item.active === true && !excludedClub.includes(item.thirdPartyId))
+      .sort((a:any,b:any)=> a.sort - b.sort)
+
+    }
+  }
+  fcGetClubList()
+
+
+</script>
+
+<template>
+<div>
+  <el-button  class=" hover:bg-amber-400 mr-3" size="large" type="primary"  @click="fcCheckGame">CheckGame</el-button>
+  <el-select
+      v-model="clubValue"
+      placeholder="Select"
+      size="large"
+      style="width: 240px"
+  >
+    <el-option
+        v-for="item in clubList"
+        :key="item.id"
+        :label="item.name"
+        :value="item.thirdPartyId"
+    />
+  </el-select>
+  <el-table :data="allGameList" style="width: 100%" height="500">
+    <el-table-column  width="200" prop="clubename" label="帳號"></el-table-column>
+    <el-table-column width="200" prop="id" label="遊戲名稱"></el-table-column>
+    <el-table-column  width="200"  prop="desc" label="狀態"></el-table-column>
+    <el-table-column width="500" prop="result.urlInfo" label="網址">
+      <template v-slot="scope">
+        <a :href="scope.row.result.urlInfo" target="_blank">{{scope.row.result.urlInfo}}</a>
+      </template>
+    </el-table-column>
+
+  </el-table>
+</div>
+</template>
+
+<style scoped>
+
+</style>

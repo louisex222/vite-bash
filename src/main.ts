@@ -8,6 +8,7 @@ import 'element-plus/dist/index.css'
 import './assets/normalize.scss'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 import VueLazyLoad from 'vue3-lazyload'
+import '@/assets/tailwind.css'
 const app = createApp(App)
 
 app.use(router)

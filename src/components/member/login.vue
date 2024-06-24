@@ -33,7 +33,7 @@ import {IFrom} from '@/vite/data';
 import {md5} from 'js-md5';
 const ruleFormRef = ref<FormInstance>()
 const form :IFrom = reactive({
-    username: 'Datw05',
+    username: 'Datw01',
     password: '8888'
 })
 type TstatusData = {

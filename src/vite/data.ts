@@ -41,6 +41,7 @@ export interface ILotteryGame {
 export interface IClub{
     thirdPartyId: string,
     name: string,
+    id:string,
 }
 
 export interface  IDataversion {

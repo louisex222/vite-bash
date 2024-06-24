@@ -26,7 +26,7 @@ const fcGetMemberInfo = async () => {
       type:'success'
     })
   }
-  console.log(res)
+
 }
 
 
@@ -44,7 +44,6 @@ const fcUpdateMemberStatus = async()=>{
   }
   const res:any = await getUpdateMemberStatusApi(param)
   if (res) {
-    console.log(res)
     ElNotification({
       title: '成功',
       message: '獲取會員資料成功',

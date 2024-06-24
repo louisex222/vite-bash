@@ -126,7 +126,7 @@ const fcGetReportStatusCheck = async ()=>{
   allReport.value = await getReportStatusCheckApi()
 }
 fcGetReportStatusCheck()
-console.log(timeRange)
+
 </script>
 
 <template>
