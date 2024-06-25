@@ -3,14 +3,13 @@
   import {getClubListApi} from '@/service/game/detail'
   import  {IClub} from '@/vite/data'
   import {Ref } from "vue";
+  import { io } from 'socket.io-client'
   // const
   interface IAllGameList {
     clubename: string,
     id: string,
     desc: string,
-    result: {
-      urlInfo: string
-    }
+    result:any
   }
   interface IMessage {
     name: string,
@@ -57,7 +56,7 @@
       };
   }
   }
-  fcConnect()
+  // fcConnect()
   const fcDisconnect =() =>{
       ws.close();
       ws.onclose = () => console.log('[close connection]')
@@ -72,6 +71,25 @@
     }
 
   }
+
+  //
+  const socket = io('http://192.168.196.134:8000',{
+    transports: ['websocket'],
+    autoConnect:true,
+    reconnection: true,
+    reconnectionAttempts: 3,
+    reconnectionDelay: 1000,
+  })
+  socket.on("getGameToken", function (data) {
+    console.log(data)
+    allGameList.value = data
+  });
+  socket.emit(
+      "getGameToken",
+      `{
+    "thirdParty_id": "AE"
+  }`
+  )
 
 </script>
 
@@ -97,7 +115,7 @@
     <el-table-column  width="200"  prop="desc" label="狀態"></el-table-column>
     <el-table-column width="500" prop="result.urlInfo" label="網址">
       <template v-slot="scope">
-        <a :href="scope.row.result.urlInfo" target="_blank">{{scope.row.result.urlInfo}}</a>
+        <a :href="scope.row.result.urlInfo" target="_blank">{{scope.row.result}}</a>
       </template>
     </el-table-column>
 
