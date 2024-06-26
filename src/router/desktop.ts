@@ -20,6 +20,7 @@ const dynamicRouter: Array<routerInter> = [
     'serverIdView',
     'reportView',
     'allGameCheckView',
+    'chatroomView',
 
 ].map((name) => {
     return {

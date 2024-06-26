@@ -11,16 +11,10 @@
     desc: string,
     result:any
   }
-  interface IMessage {
-    name: string,
-    msg: string
-  }
+
   const allGameList :Ref<IAllGameList[]> = ref([]);
   const clubList: Ref<IClub[]> = ref([])
   const clubValue :Ref<string> = ref('')
-  const inputValue: Ref<string> = ref('')
-  const message: Ref<IMessage[]> = ref([
-  ])
   const fcCheckGame = async () => {
     const param:any = {
       thirdParty_id: clubValue.value
@@ -40,39 +34,6 @@
   }
   fcGetClubList()
 
-  let ws = null;
-  const fcUpdateView = (msg) => {
-    message.value =  message.value.concat({
-      msg: msg,
-    })
-  }
-  const fcConnect =() =>{
-    if (ws === null) {
-      ws = new WebSocket('ws://localhost:8081');
-      ws.onopen = () => {
-        ws.onmessage = event => {
-          fcUpdateView(event.data)
-        }
-      };
-  }
-  }
-  // fcConnect()
-  const fcDisconnect =() =>{
-      ws.close();
-      ws.onclose = () => console.log('[close connection]')
-
-  }
-
-  const fcSend = (msg) =>{
-    ws.send(msg)
-    ws.onmessage = event => {
-        console.log(ws)
-      fcUpdateView(event.data)
-    }
-
-  }
-
-  //
   const socket = io('http://192.168.196.134:8000',{
     transports: ['websocket'],
     autoConnect:true,
@@ -90,6 +51,7 @@
     "thirdParty_id": "AE"
   }`
   )
+
 
 </script>
 
@@ -121,11 +83,7 @@
 
   </el-table>
 
-  <el-button  class=" hover:bg-amber-400" size="large" type="primary" >connect</el-button>
-  <el-button  class=" hover:bg-amber-400 mr-3" size="large" type="primary" @click="fcDisconnect ">disconnect</el-button>
-  <el-input v-model="inputValue" placeholder="請輸入" style="width: 200px"></el-input>
-  <el-button class=" hover:bg-amber-400 ml-3" size="large" type="primary" @click="fcSend(inputValue)">send</el-button>
-  <div v-for="(item,index) in message" :key="index"> 角色 : {{item.msg}}</div>
+
 </div>
 </template>
 

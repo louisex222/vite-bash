@@ -39,5 +39,6 @@
         "datetime": "遊戲時間",
         "Now_XinYong":"錢包",
         "autopilot": "自動化",
-        "allGameCheckView": "遊戲檢查"
+        "allGameCheckView": "遊戲檢查",
+        "chatroomView": "聊天室"
 }
