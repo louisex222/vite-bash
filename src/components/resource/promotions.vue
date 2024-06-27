@@ -17,7 +17,6 @@
           <img :src="item.eventNewsImgUrl" alt="">
         </li>
     </VueDraggable>
-    <div class="wall">{{ promotionComputed }}</div>
 </template>
 
 <script setup lang="ts">
