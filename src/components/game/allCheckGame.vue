@@ -41,23 +41,24 @@
     reconnectionAttempts: 3,
     reconnectionDelay: 1000,
   })
-  socket.on("getGameToken", function (data) {
-    console.log(data)
-    allGameList.value = data
-  });
-  socket.emit(
-      "getGameToken",
-      `{
-    "thirdParty_id": "AE"
-  }`
-  )
+  const fcCheckSocket = () => {
+    socket.on("getGameToken", function (data) {
+      console.log(data)
+      allGameList.value = data
+    });
+    socket.emit(
+        "getGameToken", JSON.stringify({
+    "thirdParty_id": clubValue.value
+    }))
+  }
+
 
 
 </script>
 
 <template>
 <div>
-  <el-button  class=" hover:bg-amber-400 mr-3" size="large" type="primary"  @click="fcCheckGame">CheckGame</el-button>
+  <el-button  class=" hover:bg-amber-400 mr-3" size="large" type="primary"  @click="fcCheckSocket">選擇廠商遊戲全進線</el-button>
   <el-select
       v-model="clubValue"
       placeholder="Select"
@@ -67,7 +68,7 @@
     <el-option
         v-for="item in clubList"
         :key="item.id"
-        :label="item.name"
+        :label="item.thirdPartyId"
         :value="item.thirdPartyId"
     />
   </el-select>

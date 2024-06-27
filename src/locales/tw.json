@@ -40,5 +40,6 @@
         "Now_XinYong":"錢包",
         "autopilot": "自動化",
         "allGameCheckView": "遊戲檢查",
-        "chatroomView": "聊天室"
+        "chatroomView": "聊天室",
+        "gameClubStartFlagView": "館別狀態"
 }

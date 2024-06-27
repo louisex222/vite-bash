@@ -104,7 +104,6 @@ const submitForm = (form: FormInstance | undefined) => {
     if (!form) return
     form.validate((valid: boolean) => {
         if (valid) {
-            console.log('submit!')
             fcLogin()
         } else {
             console.log('error submit!!')

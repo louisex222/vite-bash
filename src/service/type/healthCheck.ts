@@ -1,5 +1,6 @@
 import {request} from '../index'
 import {AxiosResponse} from 'axios'
+import {byJwtrequest} from "@/service/byjwtindex";
 /**
  * 透過對指定URL進行GET請求來執行健康檢查的函數。
  *
@@ -28,3 +29,11 @@ export const getAllGameCheckApi = (param:any):Promise<AxiosResponse<IRequest>> =
     })
 }
 
+
+export const getClubStartFlagApi = ():Promise<AxiosResponse<any>> => {
+    return byJwtrequest({
+        url: '/api/Game/GameClubStartFlagStatus',
+        method: 'post',
+        data: {}
+    })
+}

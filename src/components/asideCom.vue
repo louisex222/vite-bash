@@ -5,8 +5,10 @@
         <el-collapse v-model="activeNames" @change="handleChange">
             <el-collapse-item title="功能" name="1">
                 <div class="list">
-                    <el-link v-for="(item,index) in routerList" :key="index" @click="fcMoveRouter(item.path)"
-                        :underline="false">{{ $t(item.name) }}</el-link>
+                    <el-link    v-for="(item,index) in routerList" :key="index" @click="fcMoveRouter(item.path)"
+                        :underline="false">
+                      <div :class="{ 'active': item.path === route.path }">{{ $t(item.name) }}</div>
+                    </el-link>
                 </div>
             </el-collapse-item>
 
@@ -16,9 +18,10 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter} from 'vue-router'
+import { useRouter ,useRoute} from 'vue-router'
 const activeNames = ref(['1'])
-const router = useRouter()
+const router : any = useRouter()
+const route = useRoute()
 const handleChange = (val: string[]) => {
   console.log(val)
 }
@@ -35,7 +38,6 @@ const fcMoveRouter =  (value: string): void => {
 const routerList:any = computed(() => {
     return (router.options.routes[1].children ?? []).filter((item) => item.name !== 'home')
 })
-
 </script>
 
 <style scoped lang="scss">
@@ -69,5 +71,13 @@ const routerList:any = computed(() => {
 .isOpen{
     left: -300px;
     transition: 0.5s ease;
+}
+.el-link{
+  div{
+    &.active{
+      color: #409EFF;
+    }
+  }
+
 }
 </style>
