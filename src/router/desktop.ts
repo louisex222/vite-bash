@@ -12,7 +12,6 @@ const dynamicRouter: Array<routerInter> = [
     'memberInfoView',
     'creditView',
     'dataVersionView',
-    'promotionView',
     'slotGameView',
     'cardGameView',
     'liveGameView',
