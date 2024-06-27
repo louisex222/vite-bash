@@ -1,6 +1,6 @@
 import {request} from '../index'
 import {byJwtrequest} from '../byjwtindex'
-import {IPromotionListParam, ITableListParam, IServerIdParam} from '@/vite/api'
+import { ITableListParam, IServerIdParam} from '@/vite/api'
 import {AxiosResponse} from "axios";
 
 /**
@@ -39,18 +39,6 @@ export const dataVersionApi = (): Promise<AxiosResponse<any>> => {
     })
 }
 
-/**
- * 透過對指定URL進行POST請求，獲取推廣列表。
- * @param {IPromotionListParam} param - 與請求一起發送的數據。
- * @returns {Promise<any>} 解析為POST請求響應的Promise。
- */
-export const getPromotionListApi = (param: IPromotionListParam): Promise<AxiosResponse<any>> => {
-    return request({
-        url: '/api/Utils/EventNews',
-        method: 'post',
-        data: param
-    })
-}
 /**
  * 透過對指定URL進行GET請求，獲取俱樂部列表。
  * @returns {Promise<any>} 解析為GET請求響應的Promise。

@@ -52,16 +52,6 @@ export interface  IDataversion {
     version: string,
 }
 
-export interface IPromotionData {
-    eventNewBody_App: string,
-    eventNewBody_Web: string,
-    eventNewsCategory: string,
-    eventNewsID: string,
-    eventNewsImgUrl: string,
-    eventNewsOutline: string,
-    eventNewsTitle: string,
-    sortAll: number
-}
 
 export interface IFrom {
     username:string,
