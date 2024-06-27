@@ -29,13 +29,6 @@ import {IPromotionData} from "@/vite/data";
 const { locale } = useI18n()
 const  store  = useStore()
 const promotionDataList: Ref<IPromotionData[]> = ref([])
-const promotionComputed = computed<object[]>(() => {
-    return promotionDataList.value.map((item: any, index:number) => {
-        return {
-            sort: index,
-        }
-    })
-})
 const currentStep: Ref<number> = ref(1)
 const currentPromotion = computed<object[]>(() => store.getters.currentPromotion)
 const fcGetPromotion = async (): Promise<void> => {
