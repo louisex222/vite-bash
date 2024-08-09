@@ -41,5 +41,6 @@
         "autopilot": "自動化",
         "allGameCheckView": "遊戲檢查",
         "chatroomView": "聊天室",
-        "gameClubStartFlagView": "館別狀態"
+        "gameClubStartFlagView": "館別狀態",
+        "scheduleView" : "排程"
 }

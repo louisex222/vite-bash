@@ -21,6 +21,7 @@ const dynamicRouter: Array<routerInter> = [
     'allGameCheckView',
     'chatroomView',
     'gameClubStartFlagView',
+    'scheduleView'
 ].map((name) => {
     return {
         path: name === 'home' ? '/' : `/${name}`,

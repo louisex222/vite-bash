@@ -10,19 +10,9 @@ interface  IClubFlag{
 }
 const allClubFlagList: Ref<IClubFlag[]> = ref([]);
 const ishasFlag :Ref<boolean> = ref(false);
-const fcOpenGame = async() =>{
-  const param ={
-    device: 'DESKTOP',
-    lang: locale.value,
-    lobbyURL : `${window.location.origin}/close`,
-    gameCode : "17"
-  }
-  const result:any = await enterGameApi('W1Royal',param)
-}
 
 const fcGetClubStartFlag = async() : Promise<void> =>{
   try{
-     await fcOpenGame();
     const result:any = await getClubStartFlagApi();
     if(result.status ===1){
       ishasFlag.value = true;

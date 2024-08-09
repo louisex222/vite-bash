@@ -1,0 +1,18 @@
+export const GAME_TOKEN_MAPPER:any = {
+    'rcg': 'W1RCGv2',
+    'wm': 'WMLive',
+    'we': 'WE',
+    'royal': 'W1Royal',
+    'jdb': 'W1JDB',
+    'mg': 'MG',
+    'pg': 'PG',
+    'ds': 'DS',
+    'ae': 'AE',
+    'tp': 'TP',
+    'jili': 'JILI',
+    'joker': 'JOKER',
+    'gr': 'GR',
+    'nextspin': 'NEXTSPIN',
+    'pp': 'PP',
+    'fc': 'FC',
+};

@@ -121,3 +121,12 @@ export const getHistoryApi = (param:any):Promise<AxiosResponse<any>> => {
         data: param
     })
 }
+
+
+export const getHotGameListApi = (param: any):Promise<AxiosResponse<any>> =>{
+    return request({
+        url: '/api/Game/MobilePopularGames',
+        method: 'post',
+        data: param
+    })
+}
