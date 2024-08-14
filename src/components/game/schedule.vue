@@ -1,22 +1,31 @@
 <script setup lang="ts">
 import {Ref} from "vue";
 import {getClubListApi ,enterGameApi} from '@/service/game/detail';
+import {getMemberInfoApi,loginApi} from "@/service/member";
 import {IClub, ISlotGame,} from '@/vite/data'
 import { GAME_TOKEN_MAPPER } from '@/settings.ts';
 import {ElNotification} from "element-plus";
 import dayjs from 'dayjs';
+import {ILoginParam} from "@/vite/api";
+import {md5} from "js-md5";
 
 const { locale } = useI18n()
-const hotGameList : Ref<any> = ref([]);
-const clubList: Ref<IClub[]> = ref([])
-
 interface IGameList {
   clubId : number,
   gameId: string,
   gameType: 3
   thirdPartyId: string,
 }
+interface IErrorDetail {
+  thirdPartyId: number,
+  message: string,
+  detail: string,
+  errortime:string,
+  account:object
+}
 
+const hotGameList : Ref<any> = ref([]);
+const clubList: Ref<IClub[]> = ref([])
 const allGamList :Ref<IGameList[]> = ref([
   {clubId: 1, gameId: 'rcg', gameType: 1, thirdPartyId: 'RCG'},
   {clubId: 29, gameId: 'wm', gameType: 1, thirdPartyId: 'WM'},
@@ -46,12 +55,14 @@ const allGamList :Ref<IGameList[]> = ref([
   {clubId: 38, gameId:'',gameType:8,thirdPartyId:'PME'},
 ])
 
-interface IErrorDetail {
-  thirdPartyId: number,
-  message: string,
-  detail: string,
-}
+
 const errorDetail:Ref<IErrorDetail[]> = ref([])
+let currentIndex :number = 0
+let isSuccessFlag :boolean = false
+let retryCount :number = 0
+let retry :number = 3
+const clubName:string = JSON.parse(localStorage.getItem('userInfo')).result?.clubename || ''
+const memberInfo :Ref<any[]> = ref([])
 
 const fcGetClubList = async (): Promise<void> => {
   const res: any = await getClubListApi()
@@ -69,11 +80,44 @@ const fcGetClubList = async (): Promise<void> => {
   }
 }
 fcGetClubList()
+const fcLogin = async(random): Promise<void> => {
+  console.log(random)
+  const param: ILoginParam = {
+    account: memberInfo.value[random]['Club_Ename'],
+    password: md5('8888') ||md5('6666'),
+    uidKey: 'web'
+  }
+  const res:any = await loginApi(param)
+  localStorage.setItem('userInfo', JSON.stringify(res))
+  if (res.status === 1) {
+    const {result} = res;
+    localStorage.setItem('userToken', result.token)
+    ElNotification({
+      title: '登入成功',
+      message: '歡迎回來',
+      type: 'success'
+    })
+  }
+}
+const fcGetMemberInfo = async ()=>{
+  const params = {
+    "account": 'Da'
+  }
+  const res:any = await getMemberInfoApi(params)
+  if (res) {
+    memberInfo.value = res.filter((item:any)=> item.Active)
+  const randomIndex = Math.floor(Math.random() * memberInfo.value.length)
+    console.log(memberInfo.value)
+    ElNotification({
+      title: '成功',
+      message: '獲取會員資料成功',
+      type:'success'
+    })
+    await fcLogin(randomIndex)
+  }
+}
 
-let currentIndex :number = 0
-let isSuccessFlag :boolean = false
-let retryCount :number = 0
-let retry :number = 3
+fcGetMemberInfo()
 const retryApiCall = async (apiCall: () => Promise<any>, retry:number,retryCount: number,): Promise<any> => {
   for (let i = retryCount; retryCount <= retry;) {
     try {
@@ -119,7 +163,10 @@ const mixOpenGame = async (currentIndex:number): Promise<void> =>{
         errorDetail.value.push({
           thirdPartyId: game.thirdPartyId,
           message: result.desc,
-          detail: result.errorDetail
+          detail: result.errorDetail,
+          errortime:dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          account: clubName
+
         })
       }
     }
@@ -128,14 +175,14 @@ const mixOpenGame = async (currentIndex:number): Promise<void> =>{
   }
 }
 
+let intervalTimer :any = null
 const fcAddIndex = () :void =>{
-  mixOpenGame(currentIndex)
-  setInterval(() => {
-
+  intervalTimer = setInterval(() => {
     console.log('currentIndex',currentIndex)
     if(isSuccessFlag || retryCount === retry){
       if(currentIndex === allGamList.value.length -1){
         currentIndex = -1
+        clearInterval(intervalTimer)
       }
       if(currentIndex < allGamList.value.length -1){
         currentIndex++
@@ -151,8 +198,10 @@ const fcLoopCall= (timer:any):void =>{
   try{
   if(!start) start = timer
   const elapsed = timer - start
-  if(elapsed > 3600000){
-    fcAddIndex()
+  if(elapsed > 60000){
+    fcGetMemberInfo().then(()=>{
+      fcAddIndex()
+    })
     start = null
   }
   requestAnimationFrame(fcLoopCall)
@@ -177,17 +226,21 @@ if (currentHour >= 10 && currentHour < 18) {
       type="primary" plain
       v-for="(item,index) in clubList" :key="index"
       class="club-btn"
-
     >
       {{item.thirdPartyId}}
     </el-button>
 
-    <div v-for="item in errorDetail" :key="item.thirdPartyId">
-      <p>{{item.thirdPartyId}}</p>
-      <p>{{item.message}}</p>
-      <p>{{item.detail}}</p>
-    </div>
-
+    <el-table
+        :data="errorDetail" height="250"
+        :default-sort="{ prop: 'thirdPartyId', order: 'descending' }"
+        style="width: 100%"
+    >
+      <el-table-column prop="account" label="account" width="180" />
+      <el-table-column prop="errortime" label="errortime" width="180" />
+      <el-table-column prop="thirdPartyId" label="thirdPartyId" width="180" />
+      <el-table-column prop="message" label="message" width="180" />
+      <el-table-column prop="detail" label="detail" />
+    </el-table>
   </div>
 </template>
 

@@ -18,6 +18,7 @@ const fcGetMemberInfo = async () => {
     "account": input.value
   }
   const res:any = await getMemberInfoApi(params)
+  console.log(res)
   if (res) {
     memberInfo.value = res
     ElNotification({
