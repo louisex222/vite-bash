@@ -63,7 +63,7 @@ let retryCount :number = 0
 let retry :number = 3
 const clubName:string = JSON.parse(localStorage.getItem('userInfo')).result?.clubename || ''
 const memberInfo :Ref<any[]> = ref([])
-
+const userName:Ref<string> = ref('')
 const fcGetClubList = async (): Promise<void> => {
   const res: any = await getClubListApi()
   const excludedClub = ['Favorites', 'MobileHot','Golden']
@@ -88,7 +88,9 @@ const fcLogin = async(random): Promise<void> => {
     uidKey: 'web'
   }
   const res:any = await loginApi(param)
+  console.log(res)
   localStorage.setItem('userInfo', JSON.stringify(res))
+  userName.value = res.result?.clubename
   if (res.status === 1) {
     const {result} = res;
     localStorage.setItem('userToken', result.token)
@@ -160,12 +162,13 @@ const mixOpenGame = async (currentIndex:number): Promise<void> =>{
           message: game.thirdPartyId,
           type: 'error'
         })
+        console.log('error',userName.value)
         errorDetail.value.push({
           thirdPartyId: game.thirdPartyId,
           message: result.desc,
           detail: result.errorDetail,
           errortime:dayjs().format('YYYY-MM-DD HH:mm:ss'),
-          account: clubName
+          account: userName.value
 
         })
       }
@@ -198,7 +201,7 @@ const fcLoopCall= (timer:any):void =>{
   try{
   if(!start) start = timer
   const elapsed = timer - start
-  if(elapsed > 60000){
+  if(elapsed > 3600000){
     fcGetMemberInfo().then(()=>{
       fcAddIndex()
     })
