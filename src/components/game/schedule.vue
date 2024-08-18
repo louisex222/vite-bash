@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {Ref} from "vue";
-import {getClubListApi ,enterGameApi} from '@/service/game/detail';
-import {getMemberInfoApi,loginApi} from "@/service/member";
-import {IClub, ISlotGame,} from '@/vite/data'
-import { GAME_TOKEN_MAPPER } from '@/settings.ts';
+import {enterGameApi, getClubListApi} from '@/service/game/detail';
+import {getMemberInfoApi, loginApi} from "@/service/member";
+import {IClub,} from '@/vite/data'
+import {GAME_TOKEN_MAPPER} from '@/settings.ts';
 import {ElNotification} from "element-plus";
 import dayjs from 'dayjs';
 import {ILoginParam} from "@/vite/api";
@@ -11,10 +11,10 @@ import {md5} from "js-md5";
 
 const { locale } = useI18n()
 interface IGameList {
-  clubId : number,
-  gameId: string,
-  gameType: 3
-  thirdPartyId: string,
+  [clubId: string]: any,
+  [gameId: string]: any,
+  [gameType: number]: any,
+  [thirdPartyId: string]: any,
 }
 interface IErrorDetail {
   thirdPartyId: number,
@@ -23,8 +23,6 @@ interface IErrorDetail {
   errortime:string,
   account:object
 }
-
-const hotGameList : Ref<any> = ref([]);
 const clubList: Ref<IClub[]> = ref([])
 const allGamList :Ref<IGameList[]> = ref([
   {clubId: 1, gameId: 'rcg', gameType: 1, thirdPartyId: 'RCG'},
@@ -105,7 +103,10 @@ const fcGetMemberInfo = async ()=>{
   }
   const res:any = await getMemberInfoApi(params)
   if (res) {
-    memberInfo.value = res.filter((item:any)=> item.Active)
+    memberInfo.value = res.filter((item:any)=> {
+      const {Active} = item;
+      return Active;
+    })
   const randomIndex = Math.floor(Math.random() * memberInfo.value.length)
     console.log(memberInfo.value)
     ElNotification({
@@ -119,11 +120,11 @@ const fcGetMemberInfo = async ()=>{
 
 fcGetMemberInfo()
 const retryApiCall = async (apiCall: () => Promise<any>, retry:number,retryCount: number,): Promise<any> => {
-  for (let i = retryCount; retryCount <= retry;) {
+  for (; retryCount <= retry;) {
     try {
       return await apiCall();
     } catch (error) {
-      if (i === retry) {
+      if (retryCount === retry) {
         console.log('error',error)
       }
     }
@@ -160,13 +161,13 @@ const mixOpenGame = async (currentIndex:number): Promise<void> =>{
           message: game.thirdPartyId,
           type: 'error'
         })
+        const errorDetail = errorDetail.value
         errorDetail.value.push({
           thirdPartyId: game.thirdPartyId,
           message: result.desc,
           detail: result.errorDetail,
           errortime:dayjs().format('YYYY-MM-DD HH:mm:ss'),
           account: clubName
-
         })
       }
     }
