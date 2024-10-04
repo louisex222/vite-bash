@@ -31,7 +31,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import {
-  type DraggableEvent,
   type UseDraggableReturn,
   VueDraggable
 } from 'vue-draggable-plus'
@@ -833,10 +832,6 @@ const onUpdate = () => {
 </script>
 
 <style scoped>
-.ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
-}
 .csv-wrap{
   width: 80%;
   height: 700px;
