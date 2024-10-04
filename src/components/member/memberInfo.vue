@@ -95,11 +95,7 @@ const fcUpdateMemberStatus = async()=>{
       <el-option label="DongJie_Flag" value="DongJie_Flag"></el-option>
       <el-option label="Now_XinYong" value="Now_XinYong"></el-option>
    </el-select>
-   <el-select v-model="updateList.clubId" style="width: 240px">
-     <el-option label="Datw01" value="2005161771"></el-option>
-     <el-option label="Datw05" value="2005161782"></el-option>
-     <el-option label="a13579" value="C240000000162"></el-option>
-   </el-select>
+   <el-input  v-model="updateList.clubId" style="width: 240px"  placeholder="Please input"  />
    <el-select v-model="updateList.status" v-if="updateList.fieldName === 'Active' || updateList.fieldName === 'Lock' || updateList.fieldName === 'DongJie_Flag'" style="width: 240px">
      <el-option  label="啟用" value="1"></el-option>
      <el-option label="停用" value="0"></el-option>

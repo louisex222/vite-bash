@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import {Ref} from "vue";
-import {enterGameApi, getClubListApi} from '@/service/game/detail';
-import {getMemberInfoApi, loginApi} from "@/service/member";
-import {IClub,} from '@/vite/data'
-import {GAME_TOKEN_MAPPER} from '@/settings.ts';
+import {getClubListApi ,enterGameApi} from '@/service/game/detail';
+import {getMemberInfoApi,loginApi} from "@/service/member";
+import {IClub, ISlotGame,} from '@/vite/data'
+import { GAME_TOKEN_MAPPER } from '@/settings.ts';
 import {ElNotification} from "element-plus";
 import dayjs from 'dayjs';
 import {ILoginParam} from "@/vite/api";
@@ -11,10 +11,10 @@ import {md5} from "js-md5";
 
 const { locale } = useI18n()
 interface IGameList {
-  [clubId: string]: any,
-  [gameId: string]: any,
-  [gameType: number]: any,
-  [thirdPartyId: string]: any,
+  clubId : number,
+  gameId: string,
+  gameType: 3
+  thirdPartyId: string,
 }
 interface IErrorDetail {
   thirdPartyId: number,
@@ -23,6 +23,8 @@ interface IErrorDetail {
   errortime:string,
   account:object
 }
+
+const hotGameList : Ref<any> = ref([]);
 const clubList: Ref<IClub[]> = ref([])
 const allGamList :Ref<IGameList[]> = ref([
   {clubId: 1, gameId: 'rcg', gameType: 1, thirdPartyId: 'RCG'},
@@ -61,7 +63,7 @@ let retryCount :number = 0
 let retry :number = 3
 const clubName:string = JSON.parse(localStorage.getItem('userInfo')).result?.clubename || ''
 const memberInfo :Ref<any[]> = ref([])
-
+const userName:Ref<string> = ref('')
 const fcGetClubList = async (): Promise<void> => {
   const res: any = await getClubListApi()
   const excludedClub = ['Favorites', 'MobileHot','Golden']
@@ -86,7 +88,9 @@ const fcLogin = async(random): Promise<void> => {
     uidKey: 'web'
   }
   const res:any = await loginApi(param)
+  console.log(res)
   localStorage.setItem('userInfo', JSON.stringify(res))
+  userName.value = res.result?.clubename
   if (res.status === 1) {
     const {result} = res;
     localStorage.setItem('userToken', result.token)
@@ -103,10 +107,7 @@ const fcGetMemberInfo = async ()=>{
   }
   const res:any = await getMemberInfoApi(params)
   if (res) {
-    memberInfo.value = res.filter((item:any)=> {
-      const {Active} = item;
-      return Active;
-    })
+    memberInfo.value = res.filter((item:any)=> item.Active)
   const randomIndex = Math.floor(Math.random() * memberInfo.value.length)
     console.log(memberInfo.value)
     ElNotification({
@@ -120,11 +121,11 @@ const fcGetMemberInfo = async ()=>{
 
 fcGetMemberInfo()
 const retryApiCall = async (apiCall: () => Promise<any>, retry:number,retryCount: number,): Promise<any> => {
-  for (; retryCount <= retry;) {
+  for (let i = retryCount; retryCount <= retry;) {
     try {
       return await apiCall();
     } catch (error) {
-      if (retryCount === retry) {
+      if (i === retry) {
         console.log('error',error)
       }
     }
@@ -161,13 +162,14 @@ const mixOpenGame = async (currentIndex:number): Promise<void> =>{
           message: game.thirdPartyId,
           type: 'error'
         })
-        const errorDetail = errorDetail.value
+        console.log('error',userName.value)
         errorDetail.value.push({
           thirdPartyId: game.thirdPartyId,
           message: result.desc,
           detail: result.errorDetail,
           errortime:dayjs().format('YYYY-MM-DD HH:mm:ss'),
-          account: clubName
+          account: userName.value
+
         })
       }
     }
@@ -199,7 +201,7 @@ const fcLoopCall= (timer:any):void =>{
   try{
   if(!start) start = timer
   const elapsed = timer - start
-  if(elapsed > 60000){
+  if(elapsed > 3600000){
     fcGetMemberInfo().then(()=>{
       fcAddIndex()
     })
