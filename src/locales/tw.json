@@ -42,5 +42,6 @@
         "allGameCheckView": "遊戲檢查",
         "chatroomView": "聊天室",
         "gameClubStartFlagView": "館別狀態",
-        "scheduleView" : "排程"
+        "scheduleView" : "排程",
+        "csvToolsView" : "CSV工具",
 }

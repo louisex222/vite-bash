@@ -41,5 +41,7 @@
   "exclude": [ // 指定要排除的文件或文件夾
     "node_modules",
     "dist",
+    "csvtoexcel.ts",
+    "csvtojson.ts"
   ]
 }

@@ -76,3 +76,11 @@ export const getUpdateMemberStatusApi = (param:any):Promise <AxiosResponse<any>>
         data: param
     })
 }
+
+export const deleteBankInfoAPi = (param: any): Promise<AxiosResponse<any>> => {
+    return request({
+        url: 'http://192.168.196.134:8000/api/Game/DeleteBankInfo',
+        method: 'post',
+        data: param
+    })
+}
