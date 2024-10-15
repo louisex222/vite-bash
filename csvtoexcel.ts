@@ -3,34 +3,6 @@ const parse = require('csv-parser');
 const XLSX = require('xlsx');
 const { stringify } = require('csv-stringify');
 
-
-// 讀取 CSV 文件並轉換為 JSON
-function csvToJson(filePath) {
-    return new Promise((resolve, reject) => {
-        const data:string[]= [];
-        fs.createReadStream(filePath)
-            .pipe(parse({ columns: true }))
-            .on('data', (row) => {
-                data.push(row);
-            })
-            .on('end', () => {
-                resolve(data);
-            })
-            .on('error', (err) => {
-                reject(err);
-            });
-    });
-}
-
-// 將 JSON 轉換為 Excel 並保存
-function jsonToExcel(data, outputFilePath) {
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    XLSX.writeFile(workbook, outputFilePath);
-    console.log('CSV 轉 Excel 完成');
-}
-
 const workbook = XLSX.readFile('GameList.xlsx');
 // 獲取第一個工作表
 const sheet_name_list = workbook.SheetNames;
@@ -57,6 +29,29 @@ const exampleData ={
     code: '0'
 }
 let exitData = []
+
+const csvFilePath = 'input.csv';
+const excelFilePath = 'input.xlsx';
+const newExcelFilePath = 'output.xlsx';
+const newCsvFilePath = 'output.csv';
+// 讀取 CSV 文件並轉換為 JSON
+function csvToExcel(csvFilePath, outputFilePath) {
+    // 讀取 CSV 文件
+    const workbook = XLSX.readFile(csvFilePath, {codepage: 65001});
+
+    // 將讀取的第一個工作表存到新的 Excel 工作簿中
+    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+    // 創建新的 Excel 工作簿
+    const newWorkbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(newWorkbook, worksheet, 'Sheet1');
+
+    // 將工作簿保存為 Excel 文件
+    XLSX.writeFile(newWorkbook, outputFilePath);
+    console.log('CSV 轉 Excel 完成');
+
+}
+
 function excelToJson(filePath) {
     const workbook = XLSX.readFile(filePath);
     const sheetName = workbook.SheetNames[0];
@@ -110,21 +105,15 @@ function jsonToCsv(data, outputFilePath) {
 }
 
 // 主函數，執行轉換流程
-const csvFilePath = 'input.csv';
-const excelFilePath = 'output.xlsx';
-const newCsvFilePath = 'output.csv';
-const newExcelFilePath = 'input.xlsx';
+
 async function main() {
     // 這兩段式讀取csv檔案轉成excel
-    const jsonData = await csvToJson(csvFilePath);
-    jsonToExcel(jsonData, excelFilePath);
+    csvToExcel(csvFilePath, excelFilePath);
     //
-
     // 這兩段式修改玩excel檔案轉成csv
     const newJsonData = excelToJson(excelFilePath);
     jsonToCsv(newJsonData, newCsvFilePath);
-    const otherJsonData = await csvToJson(newCsvFilePath);
-    jsonToExcel(otherJsonData, newExcelFilePath);
+    csvToExcel(newCsvFilePath, newExcelFilePath);
 
 
 }
