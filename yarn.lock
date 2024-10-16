@@ -3434,10 +3434,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csv-parse@npm:^5.5.5":
-  version: 5.5.5
-  resolution: "csv-parse@npm:5.5.5"
-  checksum: 759ca2e5f3977cac7cbf3b1992dd507c6dd458163ab60671e7959d7aefd5b367d7043db65d55ed77ec56aeba2ecfa0881a2c416a44341edcfd266c3d29a424f0
+"csv-parse@npm:^5.5.6":
+  version: 5.5.6
+  resolution: "csv-parse@npm:5.5.6"
+  checksum: 8682bd3846d8159eb6f686423d16493fffeceeef742d947e39ea3a3fb9b4a243b41a4cfbac56d721a2f7825b01335ba9b993bf68c4817e7abee0bd20754ee78d
   languageName: node
   linkType: hard
 
@@ -3456,6 +3456,13 @@ __metadata:
   version: 6.5.1
   resolution: "csv-stringify@npm:6.5.1"
   checksum: 29f11681618756e4504f48b0cdd56d1e57fdb85afc2e604354bad18cd9bd9cc6c83955e663fbc51d7a66076e15a2c16828fec8cc58c0f0eff08e33838102b4ef
+  languageName: node
+  linkType: hard
+
+"csv-writer@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "csv-writer@npm:1.6.0"
+  checksum: 01ae6eb0653ef823278ba89192146631c577a8d4f69eba82cb71b315b87852952d7e1fa1d693561f00f89fd4e99433e2a8e570394d0273b0214999a0607326da
   languageName: node
   linkType: hard
 
@@ -9885,9 +9892,10 @@ __metadata:
     autoprefixer: "npm:^10.4.19"
     axios: "npm:^1.7.2"
     callsites: "npm:^4.1.0"
-    csv-parse: "npm:^5.5.5"
+    csv-parse: "npm:^5.5.6"
     csv-parser: "npm:^3.0.0"
     csv-stringify: "npm:^6.5.1"
+    csv-writer: "npm:^1.6.0"
     dayjs: "npm:^1.11.12"
     element-plus: "npm:^2.7.2"
     eslint: "npm:^8.50.0"

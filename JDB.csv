@@ -1,4 +1,4 @@
-gameId,gameName,gameType,gameClubId,thirdPartyId,serverId,imagePath,imageName,active,localizationCode,categoryIdList,sort,mType,gType,code
+﻿gameId,gameName,gameType,gameClubId,thirdPartyId,serverId,imagePath,imageName,active,localizationCode,categoryIdList,sort,mType,gType,code
 "14091","小豬銀行","3","9","JDB","1002300079","JDB","14091","True","Game_JDB_14091","1, 2, 4 ","1","0","0"," "
 "14094","牛運寶藏","3","9","JDB","1002300069","JDB","14094","True","Game_JDB_14094","1, 2, 4","2","0","0",""
 "14088","魔幻王牌","3","9","JDB","1002300066","JDB","14088","True","Game_JDB_14088","1, 2, 4","3","0","0"," "
@@ -11,7 +11,7 @@ gameId,gameName,gameType,gameClubId,thirdPartyId,serverId,imagePath,imageName,ac
 "14041","雷神之鎚","3","9","JDB","1002300108","JDB","14041","True","Game_JDB_14041","1, 2, 4","10","0","0"," "
 "14063","大三元","3","9","JDB","1002300092","JDB","14063","True","Game_JDB_14063","1, 2, 4","11","0","0"," "
 "14055","金剛","3","9","JDB","1002300078","JDB","14055","True","Game_JDB_14055","1, 2, 4","12","0","0"," "
-"8020","芝麻開門","3","9","JDB","1002300033","JDB","8020","True","Game_JDB_8020","1, 2","13","0","0"," "
+"8020","芝麻開門","3","9","JDB","1002300033","JDB","8020","True","Game_JDB_8020","1","13","0","0"," "
 "8013","泰好玩","3","9","JDB","1002300077","JDB","8013","True","Game_JDB_8013","1, 2","14","0","0"," "
 "8003","變臉","3","9","JDB","1002300127","JDB","8003","True","Game_JDB_8003","1, 2","15","0","0"," "
 "8006","台灣黑熊","3","9","JDB","1002300117","JDB","8006","True","Game_JDB_8006","1, 2","16","0","0"," "
