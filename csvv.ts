@@ -77,7 +77,7 @@ function excelToJson(filePath) {
             addData = jsonData.push({
                 ...firstData,
                 gameName: key,
-                sort: (value + 1).toString
+                sort: (value + 1).toString()
             })
         }
     });

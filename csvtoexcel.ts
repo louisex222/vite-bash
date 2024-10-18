@@ -1,11 +1,9 @@
 const fs = require('fs');
 const XLSX = require('xlsx');
-const { stringify } = require('csv-stringify');
 const { parse } = require('csv-parse/sync');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const parser  = require('csv-parser');
 // 主函數，執行轉換流程
-const bigTile ='分類規格總表'
 const thirdPartyId = 'JDB'
 const csvWriter = createCsvWriter({
     path: 'gameLists.csv',
@@ -28,9 +26,10 @@ const csvWriter = createCsvWriter({
     ]
 })
 const xlsx = XLSX.readFile(`${thirdPartyId}.xlsx`);
-const csvs = fs.readFileSync(`${thirdPartyId}.csv`, 'utf8');
+const csv = fs.readFileSync(`${thirdPartyId}.csv`, 'utf8');
 const sheetName = xlsx.SheetNames
-const table = parse(csvs)
+const table = parse(csv)
+
 const mapArr = {
     老虎機: '老虎機',
     'game id': 'gameid',
@@ -62,7 +61,29 @@ const mapArr = {
     "zh-cn簡中": 'zh-cn',
     '紅字是獨家遊戲不能下架': 'time',
 };
-
+function csvToJson(filePath) {
+    return new Promise((resolve, reject) => {
+        const data:string[]= [];
+        fs.createReadStream(filePath)
+        .pipe(parser({ columns: true }))
+        .on('data', (row) => {
+            data.push(row);
+        })
+        .on('end', () => {
+            resolve(data);
+        })
+        .on('error', (err) => {
+            reject(err);
+        });
+    });
+}
+function jsonToExcel(data, outputFilePath) {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, outputFilePath);
+    console.log('CSV 轉 Excel 完成');
+}
 const fcCheckGame = async(sheetIndex)=>{
     const sheet = xlsx.Sheets[sheetName[sheetIndex]];
     const arr = XLSX.utils.sheet_to_json(sheet);
@@ -79,8 +100,7 @@ const fcCheckGame = async(sheetIndex)=>{
     .filter((item)=>{
         return   item.gameid !== '素材連結' && item.time !== '10/4通知永久下架'
     })
-
-    const gameData =   table.slice(1).map((item)=>{
+    const gameData = table.slice(1).map((item)=>{
         return {
             gameId: item[0],
             gameName: item[1],
@@ -101,87 +121,66 @@ const fcCheckGame = async(sheetIndex)=>{
     })
     const mixData = gameData.map(item=>{
         const searchItem = searchArr.find(search =>search['zh-tw'] === item.gameName)
-        const searchIndex = searchArr.findIndex(search => search['zh-tw'] === item.gameName)
-        const searchOther = searchArr.findIndex(search => search['老虎機'] === '其他')
-        const searchFish = searchArr.findIndex(search => search['老虎機'] === '魚機')
-
-        let category = ''
+        const searchIndex = searchArr.findIndex(search =>search['zh-tw'] === item.gameName)
+        const searchOther = searchArr.some(search => search['老虎機'] === '其他')
+        const searchFish = searchArr.some(search => search['老虎機'] === '魚機')
+        const otherIndex = searchOther ? searchArr.findIndex(search => search['老虎機'] === '其他') : -1
+        const fishIndex = searchFish ? searchArr.findIndex(search => search['老虎機'] === '魚機') : -1
+        const hotGameList = [ '小豬銀行', '牛運寶藏', '魔幻王牌' , '超級牛B', '聚寶盆', '超級牛B 豪華版', '星際水果霸', '瘋狂金魚', '芝麻開門2', '雷神之鎚', '大三元', '金剛' ,'財神捕魚', '五龍捕魚', '捕魚一路發', '龍王捕魚']
         if(searchItem){
-            if(searchIndex  > searchOther && searchIndex < searchFish){
-                category = '1, 6'
+            let category = ''
+            category = '1,2'
+            if(hotGameList.includes(item.gameName)){
+                category ='1, 2, 4'
             }
-            else if(searchIndex  > searchFish ){
-                category = '1, 3'
+            if(searchOther){
+                if(searchIndex > otherIndex){
+                    category = '1, 6'
+                    if(hotGameList.includes(item.gameName)){
+                        category ='1, 4, 6'
+                    }
+                }
             }
-            else{
-                category = '1, 2'
+            if(searchFish){
+                if(searchIndex > fishIndex){
+                    category = '1, 3'
+                    if(hotGameList.includes(item.gameName)){
+                        category ='1, 3, 4'
+                    }
+                }
             }
+
             return {
                 ...item,
                 gameName: searchItem['zh-tw'],
                 gameId: searchItem.gameid,
                 thirdPartyId: thirdPartyId,
                 imagePath: searchItem.gameid,
+                imageName: searchItem.gameid,
                 localizationCode: `Game_${thirdPartyId}_${searchItem.gameid}`,
-                categoryIdList: category
+                categoryIdList: category,
+                sort: searchIndex + 1,
             }
         }
-        return item
     })
 
     csvWriter.writeRecords(mixData).then(() => {
-        console.log('...Done');
+        ('...Done');
     })
 }
 
-const allGame =async(sheetIndex)=>{
-    const sheet = xlsx.Sheets[sheetName[sheetIndex]];
-    const arr = XLSX.utils.sheet_to_json(sheet);
-    const searchArr = arr
-    console.log(searchArr)
-}
+
 const init = ()=>{
     Object.keys(sheetName).forEach(async (item) => {
         if(sheetName[item] === thirdPartyId){
-            // await fcCheckGame(item)
-        }
-        if(sheetName[item] === bigTile){
-            await allGame(item)
+            await fcCheckGame(item)
         }
     });
 }
-
 
 // ---------------------------------------------------
 const csvFilePath = 'gameLists.csv';
 const excelFilePath = 'gameLists.xlsx';
-function csvToJson(filePath) {
-    return new Promise((resolve, reject) => {
-        const data:string[]= [];
-        fs.createReadStream(filePath)
-        .pipe(parser({ columns: true }))
-        .on('data', (row) => {
-            data.push(row);
-        })
-        .on('end', () => {
-            resolve(data);
-        })
-        .on('error', (err) => {
-            reject(err);
-        });
-    });
-}
-
-// 將 JSON 轉換為 Excel 並保存
-function jsonToExcel(data, outputFilePath) {
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    XLSX.writeFile(workbook, outputFilePath);
-    console.log('CSV 轉 Excel 完成');
-}
-
-
 async function main() {
     init()
     // 這兩段式讀取csv檔案轉成excel
