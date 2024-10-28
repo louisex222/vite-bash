@@ -129,12 +129,15 @@ const fcCheckGame = async(sheetIndex)=>{
         const hotGameList = [ '小豬銀行', '牛運寶藏', '魔幻王牌' , '超級牛B', '聚寶盆', '超級牛B 豪華版', '星際水果霸', '瘋狂金魚', '芝麻開門2', '雷神之鎚', '大三元', '金剛' ,'財神捕魚', '五龍捕魚', '捕魚一路發', '龍王捕魚']
         if(searchItem){
             let category = ''
+            let sort =0
             category = '1,2'
+            sort = searchIndex + 1
             if(hotGameList.includes(item.gameName)){
                 category ='1, 2, 4'
             }
             if(searchOther){
                 if(searchIndex > otherIndex){
+                    sort = searchIndex
                     category = '1, 6'
                     if(hotGameList.includes(item.gameName)){
                         category ='1, 4, 6'
@@ -143,6 +146,7 @@ const fcCheckGame = async(sheetIndex)=>{
             }
             if(searchFish){
                 if(searchIndex > fishIndex){
+                    sort = searchIndex - 1
                     category = '1, 3'
                     if(hotGameList.includes(item.gameName)){
                         category ='1, 3, 4'
@@ -155,11 +159,11 @@ const fcCheckGame = async(sheetIndex)=>{
                 gameName: searchItem['zh-tw'],
                 gameId: searchItem.gameid,
                 thirdPartyId: thirdPartyId,
-                imagePath: searchItem.gameid,
+                imagePath: thirdPartyId,
                 imageName: searchItem.gameid,
                 localizationCode: `Game_${thirdPartyId}_${searchItem.gameid}`,
                 categoryIdList: category,
-                sort: searchIndex + 1,
+                sort: sort
             }
         }
     })
