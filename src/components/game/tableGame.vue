@@ -100,9 +100,21 @@ const fcEnterGame = async (game: any) => {
         device: 'MOBILE',
         lang: locale.value,
         lobbyURL: `${window.location.origin}/`,
-        Desk: game.desk,
+        Desk: game.thirdPartyId ==='IDN' ? '' : game.desk,
     };
-    const apiKey = game.thirdPartyId === 'RCG' ? 'W1RCGv3' : 'WMLiveV2'
+    let apiKey =''
+    switch(game.thirdPartyId){
+      case 'RCG':
+        apiKey = 'W1RCGv3';
+        break;
+      case 'WM':
+        apiKey ='WMLiveV2'
+        break;
+      default:
+        apiKey = game.thirdPartyId
+        break;
+    }
+
     try {
         const result :any = await enterGameApi(apiKey, param);
         if (result.status === 1) {

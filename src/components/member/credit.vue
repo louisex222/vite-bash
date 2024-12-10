@@ -9,7 +9,7 @@
 import { getBalanceApi  } from '@/service/member'
 import { ElNotification } from 'element-plus'
 import {  Ref } from 'vue'
-const  balance : Ref<number> = ref(10)
+const  balance : Ref<number> = ref(0)
 const balanceComputed = computed(() => {
   return balance.value.toFixed(2)
 })
@@ -41,7 +41,7 @@ const fcGetBalance = async (): Promise<void> => {
         message: '獲取餘額失敗',
         type: 'error'
       },)
-      fcCountDown(5)
+      fcCountDown(10)
     }
   }
 }

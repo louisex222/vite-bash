@@ -25,7 +25,10 @@
       ],
       "@/service": [
         "./src/service/*"
-      ]
+      ],
+      "@/vite": [
+        "./src/vite/*"
+      ],
     },
     "skipLibCheck": true, // 跳過所有的聲明文件（.d.ts）的類型檢查
     "resolveJsonModule": true, // 允許導入 .json 文件

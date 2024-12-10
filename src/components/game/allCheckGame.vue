@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import {getAllGameCheckApi} from "@/service/type/healthCheck";
   import {getClubListApi} from '@/service/game/detail'
   import  {IClub} from '@/vite/data'
   import {Ref } from "vue";
@@ -15,12 +14,6 @@
   const allGameList :Ref<IAllGameList[]> = ref([]);
   const clubList: Ref<IClub[]> = ref([])
   const clubValue :Ref<string> = ref('')
-  const fcCheckGame = async () => {
-    const param:any = {
-      thirdParty_id: clubValue.value
-    }
-    allGameList.value = await getAllGameCheckApi(param);
-  }
   const fcGetClubList = async (): Promise<void> => {
     const res: any = await getClubListApi()
     const excludedClub = ['Favorites', 'MobileHot','Golden']
