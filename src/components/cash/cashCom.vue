@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {getPaymentApi} from '@/service/wallet/index'
+import {getPaymentApi,FilePaymentApi } from '@/service/wallet/index'
 import {Ref} from 'vue';
 
 
@@ -22,7 +22,26 @@ const fetchPaymentList = async () : Promise<void> =>{
     }
 }
 
+// class Payment {
+//   constructor(){
+//     this.paymentList = Ref<PaymentType[]>([]);
+//   }
+//   public fetchPaymentList = async () :Promise<void> =>{
+//     try {
+//     const response = await getPaymentApi();
+//
+//       if (response.status === 1) {
+//       paymentList.value = response.result.paymentTypes[0].amountList.split(',');
+//     }
+//     } catch (error) {
+//       console.error('Error fetching payment list:', error);
+//     }
+//   }
+// }
 
+
+const tt  = new FilePaymentApi();
+tt.download('https://pwaapi.bacctest.com/api/H1Payment/paymenttypes')
 </script>
 
 <template>
