@@ -26,9 +26,15 @@ const isOpen: Ref<boolean | undefined> = ref(false)
 const healthFlag: Ref<boolean> = ref(false)
 provide('isOpen', isOpen)
 const fcGetHealthCheck = async (): Promise<void> => {
+  try{
    const res :any = await getHealthCheck()
-  healthFlag.value =  res['isDbHealthy'][0]['state_desc'] === 'ONLINE' && res['isRedisHealthy'] === 'PONG';
-   store.commit('setHealthFlag', healthFlag.value)
+    if(res){
+      healthFlag.value =  res['isDbHealthy'][0]['state_desc'] === 'ONLINE' && res['isRedisHealthy'] === 'PONG';
+       store.commit('setHealthFlag', healthFlag.value)
+    }
+  }catch(err){
+    console.log(err)
+  }
 }
 fcGetHealthCheck();
 const timer = setInterval(() => {

@@ -1,3 +1,4 @@
+
 export interface ILoginParam {
     account: string,
     password: string,
@@ -15,10 +16,6 @@ export interface ISlotGameParam {
 export interface ITableGameParam {
     thirdPartyId: string,
 }
-export interface IPromotionListParam {
-    Language:string
-}
-
 export interface ITableListParam{
     gameType: number
 }
@@ -29,4 +26,16 @@ export interface IServerIdParam {
 
 export interface  IMemberInfoParam{
     account: string
+}
+
+export interface IUserOrderParam{
+    amount: string,
+    paymentType: string,
+    password:  string,
+}
+
+export interface IBankTransfersParam{
+    amount: string,
+    paymentType: string,
+    password: string,
 }
