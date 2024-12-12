@@ -1,44 +1,20 @@
 <script setup lang="ts">
-import {testPaymentApi } from '@/service/wallet/index'
-import {Ref} from 'vue';
+import { testPaymentApi } from '@/service/wallet'
+import  { Ref } from 'vue';
 
 
-interface PaymentType {
-  name: string,
-  amountList: string[],
-  minAmount: number,
-  maxAmount: number
-}
-const paymentList: Ref<PaymentType[]> = ref([])
+const paymentList: Ref<string[]> = ref([])
 const fetchPaymentList = async () : Promise<void> =>{
       try {
         const response = await testPaymentApi();
         console.log(response);
         if (response.status === 1) {
-          paymentList.value = response.result.paymentTypes[0].amountList.split(',');
+          paymentList.value = response.result.paymentTypes[0].amountList
         }
       } catch (error) {
         console.error('Error fetching payment list:', error);
     }
 }
-
-// class Payment {
-//   constructor(){
-//     this.paymentList = Ref<PaymentType[]>([]);
-//   }
-//   public fetchPaymentList = async () :Promise<void> =>{
-//     try {
-//     const response = await getPaymentApi();
-//
-//       if (response.status === 1) {
-//       paymentList.value = response.result.paymentTypes[0].amountList.split(',');
-//     }
-//     } catch (error) {
-//       console.error('Error fetching payment list:', error);
-//     }
-//   }
-// }
-
 
 </script>
 
