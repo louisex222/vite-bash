@@ -1,6 +1,7 @@
 import { byJwtrequest } from '../byjwtindex'
 import  {AxiosResponse} from 'axios'
 import { IUserOrderParam ,IBankTransfersParam } from '../../vite/api';
+import {requestClient} from '../request'
 
 interface  IGamePaymentResult {
     desc: string,
@@ -77,3 +78,8 @@ export const bankTransfersApi = (data:IBankTransfersParam):Promise<AxiosResponse
         data
     })
 }
+
+export const testPaymentApi = ()=>{
+    return requestClient.get<IGamePaymentResult>('/api/H1Payment/paymenttypes')
+}
+

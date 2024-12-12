@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {getPaymentApi,FilePaymentApi } from '@/service/wallet/index'
+import {testPaymentApi } from '@/service/wallet/index'
 import {Ref} from 'vue';
 
 
@@ -12,7 +12,7 @@ interface PaymentType {
 const paymentList: Ref<PaymentType[]> = ref([])
 const fetchPaymentList = async () : Promise<void> =>{
       try {
-        const response = await getPaymentApi();
+        const response = await testPaymentApi();
         console.log(response);
         if (response.status === 1) {
           paymentList.value = response.result.paymentTypes[0].amountList.split(',');
@@ -40,8 +40,6 @@ const fetchPaymentList = async () : Promise<void> =>{
 // }
 
 
-const tt  = new FilePaymentApi();
-tt.download('https://pwaapi.bacctest.com/api/H1Payment/paymenttypes')
 </script>
 
 <template>
