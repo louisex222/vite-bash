@@ -2,7 +2,10 @@ interface routerInter {
     path: string,
     name: string,
     component: any,
-    children?: Array<routerInter>
+    children?: Array<routerInter>,
+    meta?: {
+        isLogin: boolean
+    }
 }
 
 const dynamicRouter: Array<routerInter> = [

@@ -4,7 +4,7 @@ const { parse } = require('csv-parse/sync');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const parser  = require('csv-parser');
 // 主函數，執行轉換流程
-const thirdPartyId = 'RSG'
+const thirdPartyId = 'GEMINI'
 const csvWriter = createCsvWriter({
     path: 'gameLists.csv',
     header:[
@@ -102,7 +102,10 @@ const mappingThirdPartyId = ( thirdPartyId: string ) =>{
             return 'PS';
         case 'RSG':
             return 'Royal';
+        case 'RG slot':
+            return 'RGRICH';
         default:
+
             return thirdPartyId
     }
 }
@@ -112,6 +115,8 @@ const mappingImagePath = ( thirdPartyId: string ) =>{
             return 'PS';
         case 'RSG':
             return 'RSG';
+        case 'RG slot':
+            return 'RGRICH';
         default:
             return thirdPartyId
     }
@@ -120,6 +125,8 @@ const localizationCode = ( thirdPartyId: string ) =>{
     switch (thirdPartyId) {
         case 'PS電子':
             return 'PS';
+        case 'RG slot':
+            return 'RGRICH';
         default:
             return thirdPartyId
     }
@@ -177,8 +184,7 @@ const fcCheckGame = async(sheetIndex)=>{
         const otherIndex = searchOther ? searchArr.findIndex(search => search['老虎機'] === '其他') : -1
         const fishIndex = searchFish ? searchArr.findIndex(search => search['老虎機'] === '魚機') : -1
         const fishSlotIndex = searchFishSlot ? searchArr.findIndex(search => search['老虎機'] === 'fish(魚機)') : -1
-        const hotGameList = ['狗來富','侏羅紀寶藏','麻將發了','超級王牌2','迦羅寶石4','雷神之錘','聚寶財神','五龍爭霸','法老王','法老王 II','戰神呂布','羅馬競技場','有請財神','黃金摔角手','八爪天下海霸王','福娃捕魚']
-
+        const hotGameList = ['淘金彈跳樂 ','魔幻賓果', '奧丁賓果'	]
         if(searchItem) {
             let category = ''
             let sort = 0

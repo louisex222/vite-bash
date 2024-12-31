@@ -7,16 +7,17 @@ interface  IGamePaymentResult {
     desc: string,
     errorDetail: string | null,
     code:number,
-    errorMessage: string | null,
     result: {
+        code:string,
         paymentTypes: [
             {
                 name: string,
-                amountList: string[],
+                amountList: string,
                 minAmount: number,
                 maxAmount: number
             },
         ]
+        errorMessage: string | null,
     }
     status: number
 }

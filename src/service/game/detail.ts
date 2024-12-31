@@ -92,7 +92,7 @@ export const getServerIdApi = (param:IServerIdParam): Promise<AxiosResponse<any>
 
 export  const getGameRecordApi = (param:any) : Promise<AxiosResponse<any>> =>{
     return byJwtrequest({
-        url: '/api/Report/GameRecord2',
+        url: 'https://pwaapi.royal-test.com/api/Report/GameRecord2',
         method: 'post',
         data: param
     })

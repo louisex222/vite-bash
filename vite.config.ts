@@ -38,7 +38,7 @@ const userConfig = defineConfig({
   },
   server: { //本地運行配置，以及反向代理配置
     host: 'localhost', //指定主機名
-    port: 8000, //指定端口號
+    port: 6189, //指定端口號
     strictPort: false, //設為true時端口被佔用則直接退出，不會嘗試下一個可用端口
     open: true, //服務啟動時自動在瀏覽器中打開應用
     proxy: {   // 反向代理配置

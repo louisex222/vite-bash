@@ -8,7 +8,7 @@ import {byJwtrequest} from "@/service/byjwtindex";
  */
 export const getHealthCheck = ():Promise<AxiosResponse<any>> =>{
     return request({
-        url: 'http://192.168.196.134:8000/api/Game/HealthCheck',
+        url: 'http://localhost:3000/api/Game/HealthCheck',
         method: 'get',
         data: {}
     })
