@@ -181,7 +181,7 @@ const fcCheckGame = async(sheetIndex)=>{
         const fishIndex = searchFish ? searchArr.findIndex(search => search['老虎機'] === '魚機') : -1
         const fishSlotIndex = searchFishSlot ? searchArr.findIndex(search => search['老虎機'] === 'fish(魚機)') : -1
         // 熱門遊戲
-        const hotGameList = ['淘金彈跳樂 ','魔幻賓果', '奧丁賓果'	]
+        const hotGameList = ['淘金彈跳樂','魔幻賓果', '奧丁賓果'	]
         if(searchItem) {
             let category = ''
             let sort = 0
@@ -189,7 +189,7 @@ const fcCheckGame = async(sheetIndex)=>{
             category = '1,2'
             sort = searchIndex + 1
 
-            if (hotGameList.includes(item.gameName)) {
+            if (hotGameList.includes(item.gameName.trim(''))) {
                 category = '1, 2, 4'
             }
             if (searchOther) {
