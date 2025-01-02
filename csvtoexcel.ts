@@ -115,13 +115,12 @@ const fcCheckGame = async(sheetIndex)=>{
     //將xlsx資料key轉成統一格式並重組排列
     const searchArr = arr
     .map((item) => {
-        const result = Object.entries(item).reduce((acc, [key, value]) => {
+        return Object.entries(item).reduce((acc, [key, value]) => {
             const filterKey = key.replace('\r\n', '');
             const newKey = mapArr[filterKey];
             acc[newKey] = value + ''
             return acc;
         }, {});
-        return result;
     }).filter((item)=> item.gameid)
 
     // xlsx資料轉成map獲得總數
@@ -183,8 +182,6 @@ const fcCheckGame = async(sheetIndex)=>{
         // 熱門遊戲
         const hotGameList = ['淘金彈跳樂','魔幻賓果', '奧丁賓果'	]
         if(searchItem) {
-            let category = ''
-            let sort = 0
             let active = "True"
             category = '1,2'
             sort = searchIndex + 1
