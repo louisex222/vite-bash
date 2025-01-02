@@ -4,7 +4,7 @@ const { parse: csvParse } = require('csv-parse/sync');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const parser  = require('csv-parser');
 // 主函數，執行轉換流程
-const thirdPartyId = 'GEMINI'
+const thirdPartyId = 'RSG'
 const csvWriter = createCsvWriter({
     path: 'gameLists.csv',
     header:[
@@ -69,7 +69,16 @@ const mapArr = {
     "mm緬文": 'my-mm',
     "GameID": 'gameid',
     "fish(魚機)":'老虎機',
-    "slot(老虎機)":'老虎機'
+    "slot(老虎機)":'老虎機',
+    "zh-tw":'zh-tw',
+    "zh-cn":'zh-cn',
+    "en":'en-us',
+    "th":'th-th',
+    "vi":'vi-vn',
+    "mm":'my-mm',
+    "kr":'ko-kr',
+    "ja": 'ja-jp',
+    'ja\n日文': 'ja-jp',
 }; //將header統一格式
 
 const mappingThirdPartyId = ( thirdPartyId: string ) =>{
@@ -116,12 +125,15 @@ const fcCheckGame = async(sheetIndex)=>{
     const searchArr:any = arr
     .map((item:any) => {
         return Object.entries(item).reduce((acc, [key, value]) => {
-            const filterKey = key.replace('\r\n', '');
+            const filterKey = key.replace(/[\r\n\s]/g, '');
             const newKey = mapArr[filterKey];
             acc[newKey] = value + ''
             return acc;
         }, {});
-    }).filter((item:any)=> item.gameid)
+    }).filter((item)=>{
+        //濾出 item裡的值有'V'的資料
+        return Object.values(item).some((value)=> value === 'V')
+    })
 
     // xlsx資料轉成map獲得總數
     const orderMap :any = new Map(searchArr.map((item,index)=> [item['zh-tw'],index]))
@@ -172,8 +184,8 @@ const fcCheckGame = async(sheetIndex)=>{
     function getSearchInfo(gameName, searchArr) {
         const searchItem = searchArr.find(search => search['zh-tw'] === gameName);
         const searchIndex = searchItem ? searchArr.indexOf(searchItem) : -1;
-        const hotGameList = ['淘金彈跳樂', '魔幻賓果', '奧丁賓果'];
-        const isHotGame = hotGameList.includes(gameName.trim());
+        const hotGameList = ['麻將發了2', '狗來富', '侏羅紀寶藏', '麻將發了', '超級王牌2', '迦羅寶石4', '雷神之錘', '聚寶財神', '五龍爭霸', '法老王', '法老王 II', '戰神呂布', '羅馬競技場', '有請財神'];
+        const isHotGame = hotGameList.includes(gameName);
         const searchOther = searchArr.some(search => search['老虎機'] === '其他');
         const searchFish = searchArr.some(search => search['老虎機'] === '魚機');
         const searchFishSlot = searchArr.some(search => search['老虎機'] === 'fish(魚機)');
