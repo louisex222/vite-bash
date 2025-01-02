@@ -1,6 +1,6 @@
-const fs = require('fs');
-const XLSX = require('xlsx');
-const { parse } = require('csv-parse/sync');
+const fss = require('fs');
+const XLSXs = require('xlsx');
+const { parse: csvParse } = require('csv-parse/sync');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const parser  = require('csv-parser');
 // 主函數，執行轉換流程
@@ -26,13 +26,13 @@ const csvWriter = createCsvWriter({
     ]
 })
 
-const xlsx = XLSX.readFile(`${thirdPartyId}.xlsx`);
-const csv = fs.readFileSync(`${thirdPartyId}.csv`, 'utf8');
+const xlsx = XLSXs.readFile(`${thirdPartyId}.xlsx`);
+const csv = fss.readFileSync(`${thirdPartyId}.csv`, 'utf8');
 const sheetName = xlsx.SheetNames
-const table = parse(csv)  //廠商csv資料
+const table = csvParse(csv)  //廠商csv資料
 const mapArr = {
-    老虎機: '老虎機',
-    其他: '老虎機',
+    "老虎機": '老虎機',
+    "其他": '老虎機',
     'game id': 'gameid',
     gTyp: 'gameid',
     mType: 'gameid',
@@ -55,9 +55,9 @@ const mapArr = {
     'zh-cn簡中名稱': 'zh-cn',
     'zh-tw繁中名稱': 'zh-tw',
     "zh-tw繁中":'zh-tw',
-    en英文名稱: 'en-us',
-    th泰文名稱: 'th-th',
-    vi越南名稱: 'vi-vn',
+    "en英文名稱": 'en-us',
+    "th泰文名稱": 'th-th',
+    "vi越南名稱": 'vi-vn',
     "en英文": 'en-us',
     "zh-cn簡中": 'zh-cn',
     __EMPTY: 'down',
@@ -111,17 +111,17 @@ const localizationCode = ( thirdPartyId: string ) =>{
 // 功能邏輯
 const fcCheckGame = async(sheetIndex)=>{
     const sheet = xlsx.Sheets[sheetName[sheetIndex]];
-    const arr = XLSX.utils.sheet_to_json(sheet);
+    const arr = XLSXs.utils.sheet_to_json(sheet);
     //將xlsx資料key轉成統一格式並重組排列
-    const searchArr = arr
-    .map((item) => {
+    const searchArr:any = arr
+    .map((item:any) => {
         return Object.entries(item).reduce((acc, [key, value]) => {
             const filterKey = key.replace('\r\n', '');
             const newKey = mapArr[filterKey];
             acc[newKey] = value + ''
             return acc;
         }, {});
-    }).filter((item)=> item.gameid)
+    }).filter((item:any)=> item.gameid)
 
     // xlsx資料轉成map獲得總數
     const orderMap :any = new Map(searchArr.map((item,index)=> [item['zh-tw'],index]))
@@ -168,53 +168,66 @@ const fcCheckGame = async(sheetIndex)=>{
             }
         })
     })
+    // 搜尋遊戲名稱排序
+    function getSearchInfo(gameName, searchArr) {
+        const searchItem = searchArr.find(search => search['zh-tw'] === gameName);
+        const searchIndex = searchItem ? searchArr.indexOf(searchItem) : -1;
+        const hotGameList = ['淘金彈跳樂', '魔幻賓果', '奧丁賓果'];
+        const isHotGame = hotGameList.includes(gameName.trim());
+        const searchOther = searchArr.some(search => search['老虎機'] === '其他');
+        const searchFish = searchArr.some(search => search['老虎機'] === '魚機');
+        const searchFishSlot = searchArr.some(search => search['老虎機'] === 'fish(魚機)');
+        const otherIndex = searchOther ? searchArr.findIndex(search => search['老虎機'] === '其他') : -1;
+        const fishIndex = searchFish ? searchArr.findIndex(search => search['老虎機'] === '魚機') : -1;
+        const fishSlotIndex = searchFishSlot ? searchArr.findIndex(search => search['老虎機'] === 'fish(魚機)') : -1;
+
+        return {
+            searchItem,
+            searchIndex,
+            isHotGame,
+            otherIndex,
+            fishIndex,
+            fishSlotIndex,
+            searchOther,
+            searchFish,
+            searchFishSlot,
+        };
+    }
 
     const mixData = gameData
     .map(item=>{
-        const searchItem = searchArr.find(search =>search['zh-tw'] === item.gameName)
-        const searchIndex = searchArr.findIndex(search =>search['zh-tw'] === item.gameName)
-        const searchOther = searchArr.some(search => search['老虎機'] === '其他')
-        const searchFish = searchArr.some(search => search['老虎機'] === '魚機')
-        const searchFishSlot = searchArr.some(search => search['老虎機'] === 'fish(魚機)')
-        const otherIndex = searchOther ? searchArr.findIndex(search => search['老虎機'] === '其他') : -1
-        const fishIndex = searchFish ? searchArr.findIndex(search => search['老虎機'] === '魚機') : -1
-        const fishSlotIndex = searchFishSlot ? searchArr.findIndex(search => search['老虎機'] === 'fish(魚機)') : -1
-        // 熱門遊戲
-        const hotGameList = ['淘金彈跳樂','魔幻賓果', '奧丁賓果'	]
-        if(searchItem) {
-            let active = "True"
-            category = '1,2'
-            sort = searchIndex + 1
+        const searchInfo = getSearchInfo(item.gameName, searchArr);
+        const {
+            searchItem,
+            searchIndex,
+            otherIndex,
+            fishIndex,
+            fishSlotIndex ,
+            searchOther,
+            searchFish,
+            searchFishSlot,
+            isHotGame
+        } = searchInfo;
 
-            if (hotGameList.includes(item.gameName.trim(''))) {
-                category = '1, 2, 4'
+        if(searchItem) {
+            let category = '1,2';
+            let sort = searchIndex + 1;
+            let active = "True";
+
+            if (isHotGame) {
+                category = '1, 2, 4';
             }
-            if (searchOther) {
-                if (searchIndex > otherIndex) {
-                    sort = searchIndex
-                    category = '1, 6'
-                    if (hotGameList.includes(item.gameName)) {
-                        category = '1, 4, 6'
-                    }
-                }
+            if (searchOther && searchIndex > otherIndex) {
+                category = isHotGame ? '1, 4, 6' : '1, 6';
+                sort = searchIndex;
             }
-            if (searchFish) {
-                if (searchIndex > fishIndex ) {
-                    sort = searchIndex
-                    category = '1, 3'
-                    if (hotGameList.includes(item.gameName)) {
-                        category = '1, 3, 4'
-                    }
-                }
+            if (searchFish && searchIndex > fishIndex) {
+                category = isHotGame ? '1, 3, 4' : '1, 3';
+                sort = searchIndex;
             }
-            if (searchFishSlot) {
-                if (searchIndex > fishSlotIndex ) {
-                    sort = searchIndex
-                    category = '1, 3'
-                    if (hotGameList.includes(item.gameName)) {
-                        category = '1, 3, 4'
-                    }
-                }
+            if (searchFishSlot && searchIndex > fishSlotIndex) {
+                category = isHotGame ? '1, 3, 4' : '1, 3';
+                sort = searchIndex;
             }
 
             return {
@@ -254,12 +267,12 @@ const fcCheckGame = async(sheetIndex)=>{
 
 // ---------------------------------------------------
 
-const csvFilePath = 'gameLists.csv';
-const excelFilePath = 'gameLists.xlsx';
-function csvToJson(filePath) {
+const csvFilePaths = 'gameLists.csv';
+const excelFilePaths = 'gameLists.xlsx';
+const csvToJsons = (filePath) => {
     return new Promise((resolve, reject) => {
         const data:string[]= [];
-        fs.createReadStream(filePath)
+        fss.createReadStream(filePath)
         .pipe(parser({ columns: true }))
         .on('data', (row) => {
             data.push(row);
@@ -272,20 +285,20 @@ function csvToJson(filePath) {
         });
     });
 }
-function jsonToExcel(data, outputFilePath) {
-    const worksheet = XLSX.utils.json_to_sheet(data);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    XLSX.writeFile(workbook, outputFilePath);
+const  jsonToExcels = (data, outputFilePath) => {
+    const worksheet = XLSXs.utils.json_to_sheet(data);
+    const workbook = XLSXs.utils.book_new();
+    XLSXs.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSXs.writeFile(workbook, outputFilePath);
     console.log('CSV 轉 Excel 完成');
 }
- async function main() {
+ const  mains = async() => {
     init()
     // 這兩段式讀取csv檔案轉成excel
-    const jsonData = await csvToJson(csvFilePath);
-    jsonToExcel(jsonData, excelFilePath);
+    const jsonData = await csvToJsons(csvFilePaths);
+    jsonToExcels(jsonData, excelFilePaths);
 }
 
-main().catch((error) => console.error(error));
+mains().catch((error) => console.error(error));
 
 
