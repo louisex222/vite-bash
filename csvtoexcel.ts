@@ -197,7 +197,28 @@ const fcCheckGame = async(sheetIndex)=>{
         const otherIndex = searchOther ? searchArr.findIndex(search => search['老虎機'] === '其他') : -1;
         const fishIndex = searchFish ? searchArr.findIndex(search => search['老虎機'] === '魚機') : -1;
         const fishSlotIndex = searchFishSlot ? searchArr.findIndex(search => search['老虎機'] === 'fish(魚機)') : -1;
-
+        let category = '1,2';
+        let sort = searchIndex + 1;
+        let active = "True";
+        if (isHotGame) {
+            category = '1, 2, 4';
+        }
+        if (searchOther && searchIndex > otherIndex) {
+            category = isHotGame ? '1, 4, 6' : '1, 6';
+            sort = searchIndex;
+        }
+        if (searchFish && searchIndex > fishIndex) {
+            category = isHotGame ? '1, 3, 4' : '1, 3';
+            sort = searchIndex;
+        }
+        if (searchFishSlot && searchIndex > fishSlotIndex) {
+            category = isHotGame ? '1, 3, 4' : '1, 3';
+            sort = searchIndex;
+        }
+        if(thirdPartyId === 'GEMINI'){
+            category = isHotGame ? '1, 4, 6' : '1, 6';
+            sort = searchIndex+1;
+        }
         return {
             searchItem,
             searchIndex,
@@ -208,48 +229,17 @@ const fcCheckGame = async(sheetIndex)=>{
             searchOther,
             searchFish,
             searchFishSlot,
+            category,
+            sort,
+            active,
         };
     }
 
     const mixData = gameData
     .map(item=>{
         const searchInfo = getSearchInfo(item.gameName, searchArr);
-        const {
-            searchItem,
-            searchIndex,
-            otherIndex,
-            fishIndex,
-            fishSlotIndex ,
-            searchOther,
-            searchFish,
-            searchFishSlot,
-            isHotGame
-        } = searchInfo;
-
+        const {searchItem,  category, sort, active} = searchInfo;
         if(searchItem) {
-            let category = '1,2';
-            let sort = searchIndex + 1;
-            let active = "True";
-
-            if (isHotGame) {
-                category = '1, 2, 4';
-            }
-            if (searchOther && searchIndex > otherIndex) {
-                category = isHotGame ? '1, 4, 6' : '1, 6';
-                sort = searchIndex;
-            }
-            if (searchFish && searchIndex > fishIndex) {
-                category = isHotGame ? '1, 3, 4' : '1, 3';
-                sort = searchIndex;
-            }
-            if (searchFishSlot && searchIndex > fishSlotIndex) {
-                category = isHotGame ? '1, 3, 4' : '1, 3';
-                sort = searchIndex;
-            }
-            if(item.thirdPartyId === 'GEMINI'){
-                category = isHotGame ? '1, 4, 6' : '1, 6';
-                sort = searchIndex+1;
-            }
             return {
                 ...item,
                 gameName: searchItem['zh-tw'],
