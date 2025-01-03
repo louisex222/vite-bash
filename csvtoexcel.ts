@@ -4,7 +4,7 @@ const { parse: csvParse } = require('csv-parse/sync');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const parser  = require('csv-parser');
 // 主函數，執行轉換流程
-const thirdPartyId = 'GEMINI'
+const thirdPartyId = 'RSG'
 const csvWriter = createCsvWriter({
     path: 'gameLists.csv',
     header:[
@@ -134,6 +134,7 @@ const fcCheckGame = async(sheetIndex)=>{
         //濾出 item裡的值有'v'的資料 限制小v
         return Object.values(item).some((value)=> value === 'v')
     })
+
     // xlsx資料轉成map獲得總數
     const orderMap :any = new Map(searchArr.map((item,index)=> [item['zh-tw'],index]))
 
@@ -186,11 +187,11 @@ const fcCheckGame = async(sheetIndex)=>{
         })
     })
     // 搜尋遊戲名稱排序
-    function getSearchInfo(gameName, searchArr) {
-        const searchItem = searchArr.find(search => search['zh-tw'] === gameName);
+    function getSearchInfo(item, searchArr) {
+        const searchItem = searchArr.find(search => search['zh-tw'] === item.gameName);
         const searchIndex = searchItem ? searchArr.indexOf(searchItem) : -1;
-        const hotGameList = ['淘金彈跳樂 ','魔幻賓果', '奧丁賓果'];
-        const isHotGame = hotGameList.includes(gameName);
+        const hotGameList = ['麻將發了2', '狗來富', '侏羅紀寶藏', '麻將發了', '超級王牌2', '迦羅寶石4', '雷神之錘', '聚寶財神', '五龍爭霸', '法老王', '法老王 II', '戰神呂布', '羅馬競技場', '有請財神'];
+        const isHotGame = hotGameList.includes(item.gameName);
         const searchOther = searchArr.some(search => search['老虎機'] === '其他');
         const searchFish = searchArr.some(search => search['老虎機'] === '魚機');
         const searchFishSlot = searchArr.some(search => search['老虎機'] === 'fish(魚機)');
@@ -215,7 +216,7 @@ const fcCheckGame = async(sheetIndex)=>{
             category = isHotGame ? '1, 3, 4' : '1, 3';
             sort = searchIndex;
         }
-        if(thirdPartyId === 'GEMINI'){
+        if(item.thirdPartyId === 'GEMINI'){
             category = isHotGame ? '1, 4, 6' : '1, 6';
             sort = searchIndex+1;
         }
@@ -237,7 +238,7 @@ const fcCheckGame = async(sheetIndex)=>{
 
     const mixData = gameData
     .map(item=>{
-        const searchInfo = getSearchInfo(item.gameName, searchArr);
+        const searchInfo = getSearchInfo(item, searchArr);
         const {searchItem,  category, sort, active} = searchInfo;
         if(searchItem) {
             return {
@@ -253,7 +254,7 @@ const fcCheckGame = async(sheetIndex)=>{
             }
         }
     })
-    .filter((item)=> !!item )
+    .filter((item)=> !!item && item.gameId !== 'gameid')
     .map((item)=> {
         if(down.includes(item.gameName)){
             item.active = "False"

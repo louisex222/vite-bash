@@ -1,33 +1,87 @@
 gameId,gameName,gameType,gameClubId,thirdPartyId,serverId,imagePath,imageName,active,localizationCode,categoryIdList,sort,mType,gType,code
-StandAlonePlinkoGR,淘金彈跳樂 ,3,43,GEMINI,2000000021,GEMINI,StandAlonePlinkoGR,True,GEMINI_StandAlonePlinkoGR,"1, 4, 6",1,0,0,0
-StandAloneMinesCL,經典踩地雷,3,43,GEMINI,2000000021,GEMINI,StandAloneMinesCL,True,GEMINI_StandAloneMinesCL,"1, 6",2,0,0,0
-MagicBingo,魔幻賓果,3,43,GEMINI,2000000021,GEMINI,MagicBingo,True,GEMINI_MagicBingo,"1, 4, 6",3,0,0,0
-StandAloneMines,深水炸彈,3,43,GEMINI,2000000021,GEMINI,StandAloneMines,True,GEMINI_StandAloneMines,"1, 6",4,0,0,0
-OdinBingo,奧丁賓果,3,43,GEMINI,2000000021,GEMINI,OdinBingo,True,GEMINI_OdinBingo,"1, 4, 6",5,0,0,0
-Steampunk,蒸氣龐克,3,43,GEMINI,2000000021,GEMINI,Steampunk,True,GEMINI_Steampunk,"1, 6",6,0,0,0
-StandAloneHiloCL,經典猜大小,3,43,GEMINI,2000000021,GEMINI,StandAloneHiloCL,True,GEMINI_StandAloneHiloCL,"1, 6",7,0,0,0
-StandAlonePlinkoCL,經典彈跳樂,3,43,GEMINI,2000000021,GEMINI,StandAlonePlinkoCL,True,GEMINI_StandAlonePlinkoCL,"1, 6",8,0,0,0
-CaveBingo,洞穴賓果,3,43,GEMINI,2000000021,GEMINI,CaveBingo,True,GEMINI_CaveBingo,"1, 6",9,0,0,0
-StandAloneHilo,猜大小,3,43,GEMINI,2000000021,GEMINI,StandAloneHilo,True,GEMINI_StandAloneHilo,"1, 6",10,0,0,0
-CaribbeanBingo,加勒比海賓果,3,43,GEMINI,2000000021,GEMINI,CaribbeanBingo,True,GEMINI_CaribbeanBingo,"1, 6",11,0,0,0
-StandAloneLimboCL,經典猜臨界,3,43,GEMINI,2000000021,GEMINI,StandAloneLimboCL,True,GEMINI_StandAloneLimboCL,"1, 6",12,0,0,0
-LostRuins,失落遺跡,3,43,GEMINI,2000000021,GEMINI,LostRuins,True,GEMINI_LostRuins,"1, 6",13,0,0,0
-StandAlonePlinko,金剛彈珠,3,43,GEMINI,2000000021,GEMINI,StandAlonePlinko,True,GEMINI_StandAlonePlinko,"1, 6",14,0,0,0
-StandAloneMinesNE,霓虹踩地雷,3,43,GEMINI,2000000021,GEMINI,StandAloneMinesNE,True,GEMINI_StandAloneMinesNE,"1, 6",15,0,0,0
-StandAloneLimbo,魔法邊緣,3,43,GEMINI,2000000021,GEMINI,StandAloneLimbo,True,GEMINI_StandAloneLimbo,"1, 6",16,0,0,0
-StandAloneWheel,法老轉盤,3,43,GEMINI,2000000021,GEMINI,StandAloneWheel,True,GEMINI_StandAloneWheel,"1, 6",17,0,0,0
-MultiPlayerCrash,驚爆隕石,3,43,GEMINI,2000000021,GEMINI,MultiPlayerCrash,True,GEMINI_MultiPlayerCrash,"1, 6",18,0,0,0
-StandAloneDice,幸運骰子,3,43,GEMINI,2000000021,GEMINI,StandAloneDice,True,GEMINI_StandAloneDice,"1, 6",19,0,0,0
-StandAloneDiamonds,鑽石大亨,3,43,GEMINI,2000000021,GEMINI,StandAloneDiamonds,True,GEMINI_StandAloneDiamonds,"1, 6",20,0,0,0
-StandAloneHiloNE,霓虹猜大小,3,43,GEMINI,2000000021,GEMINI,StandAloneHiloNE,True,GEMINI_StandAloneHiloNE,"1, 6",21,0,0,0
-StandAloneKeno,萬聖基諾,3,43,GEMINI,2000000021,GEMINI,StandAloneKeno,True,GEMINI_StandAloneKeno,"1, 6",22,0,0,0
-BonusBingo,爆獎賓果,3,43,GEMINI,2000000021,GEMINI,BonusBingo,True,GEMINI_BonusBingo,"1, 6",23,0,0,0
-MultiPlayerCrashCL,經典爆破震,3,43,GEMINI,2000000021,GEMINI,MultiPlayerCrashCL,True,GEMINI_MultiPlayerCrashCL,"1, 6",24,0,0,0
-MultiPlayerAviator,飛行員,3,43,GEMINI,2000000021,GEMINI,MultiPlayerAviator,True,GEMINI_MultiPlayerAviator,"1, 6",25,0,0,0
-MultiPlayerMultiHilo,多人猜大小,3,43,GEMINI,2000000021,GEMINI,MultiPlayerMultiHilo,True,GEMINI_MultiPlayerMultiHilo,"1, 6",26,0,0,0
-MultiPlayerCrashNE,霓虹爆破震,3,43,GEMINI,2000000021,GEMINI,MultiPlayerCrashNE,True,GEMINI_MultiPlayerCrashNE,"1, 6",27,0,0,0
-StandAlonePlinkoNE,霓虹彈跳樂,3,43,GEMINI,2000000021,GEMINI,StandAlonePlinkoNE,True,GEMINI_StandAlonePlinkoNE,"1, 6",28,0,0,0
-StandAloneLimboNE,霓虹猜臨界,3,43,GEMINI,2000000021,GEMINI,StandAloneLimboNE,True,GEMINI_StandAloneLimboNE,"1, 6",29,0,0,0
-StandAloneMinesGR,淘金踩地雷,3,43,GEMINI,2000000021,GEMINI,StandAloneMinesGR,True,GEMINI_StandAloneMinesGR,"1, 6",30,0,0,0
-StandAloneHiloGR,淘金猜大小,3,43,GEMINI,2000000021,GEMINI,StandAloneHiloGR,True,GEMINI_StandAloneHiloGR,"1, 6",31,0,0,0
-StandAloneLimboGR,淘金猜臨界,3,43,GEMINI,2000000021,GEMINI,StandAloneLimboGR,True,GEMINI_StandAloneLimboGR,"1, 6",32,0,0,0
+127,大過年3,3,8,Royal,1002270060,RSG,127,True,RSG_127,"1,2",1,0,0,0
+126,逛夜市3,3,8,Royal,1002270060,RSG,126,True,RSG_126,"1,2",2,0,0,0
+118,麻將發了2,3,8,Royal,1002270060,RSG,118,True,RSG_118,"1, 2, 4",3,0,0,0
+122,狗來富,3,8,Royal,1002270060,RSG,122,True,RSG_122,"1, 2, 4",4,0,0,0
+123,侏羅紀寶藏,3,8,Royal,1002270060,RSG,123,True,RSG_123,"1, 2, 4",5,0,0,0
+117,麻將發了,3,8,Royal,1002270082,RSG,117,True,RSG_117,"1, 2, 4",6,0,0,0
+128,超級王牌2,3,8,Royal,1002270000,RSG,128,True,RSG_128,"1, 2, 4",7,0,0,0
+125,迦羅寶石4,3,8,Royal,1002270000,RSG,125,True,RSG_125,"1, 2, 4",8,0,0,0
+112,雷神之錘,3,8,Royal,1002270078,RSG,112,True,RSG_112,"1, 2, 4",9,0,0,0
+114,聚寶財神,3,8,Royal,1002270083,RSG,114,True,RSG_114,"1, 2, 4",10,0,0,0
+19,五龍爭霸,3,8,Royal,1002270019,RSG,19,True,RSG_19,"1, 2, 4",11,0,0,0
+6,法老王,3,8,Royal,1002270006,RSG,6,True,RSG_6,"1, 2, 4",12,0,0,0
+82,法老王 II,3,8,Royal,1002270073,RSG,82,True,RSG_82,"1, 2, 4",13,0,0,0
+121,戰神呂布,3,8,Royal,1002270085,RSG,121,True,RSG_121,"1, 2, 4",14,0,0,0
+100,羅馬競技場,3,8,Royal,1002270063,RSG,100,True,RSG_100,"1, 2, 4",15,0,0,0
+120,有請財神,3,8,Royal,1002270087,RSG,120,True,RSG_120,"1, 2, 4",16,0,0,0
+75,黃金摔角手,3,8,Royal,1002270086,RSG,75,True,RSG_75,"1,2",17,0,0,0
+50,跳跳獅,3,8,Royal,1002270049,RSG,50,True,RSG_50,"1,2",18,0,0,0
+28,行運一條龍,3,8,Royal,1002270028,RSG,28,True,RSG_28,"1,2",19,0,0,0
+111,開心農場,3,8,Royal,1002270079,RSG,111,True,RSG_111,"1,2",20,0,0,0
+8,幸運水果,3,8,Royal,1002270008,RSG,8,True,RSG_8,"1,2",21,0,0,0
+3,皇家777,3,8,Royal,1002270003,RSG,3,True,RSG_3,"1,2",22,0,0,0
+81,龍王2,3,8,Royal,1002270074,RSG,81,True,RSG_81,"1,2",23,0,0,0
+21,七十二變,3,8,Royal,1002270021,RSG,21,True,RSG_21,"1,2",24,0,0,0
+30,龍王,3,8,Royal,1002270033,RSG,30,True,RSG_30,"1,2",25,0,0,0
+7,阿里巴巴,3,8,Royal,1002270007,RSG,7,True,RSG_7,"1,2",26,0,0,0
+52,美狄亞,3,8,Royal,1002270069,RSG,52,True,RSG_52,"1,2",27,0,0,0
+40,福娃發發,3,8,Royal,1002270043,RSG,40,True,RSG_40,"1,2",28,0,0,0
+31,提金派對,3,8,Royal,1002270030,RSG,31,True,RSG_31,"1,2",29,0,0,0
+59,秘林熊貓,3,8,Royal,1002270059,RSG,59,True,RSG_59,"1,2",30,0,0,0
+1,泰有錢,3,8,Royal,1002270002,RSG,1,True,RSG_1,"1,2",31,0,0,0
+78,皇家7777,3,8,Royal,1002270075,RSG,78,True,RSG_78,"1,2",32,0,0,0
+24,荒野水牛,3,8,Royal,1002270024,RSG,24,True,RSG_24,"1,2",33,0,0,0
+17,瘋狂博士,3,8,Royal,1002270017,RSG,17,True,RSG_17,"1,2",34,0,0,0
+90,龍行天下,3,8,Royal,1002270062,RSG,90,True,RSG_90,"1,2",35,0,0,0
+51,美杜莎,3,8,Royal,1002270070,RSG,51,True,RSG_51,"1,2",36,0,0,0
+2001,能量外星人,3,8,Royal,1002270061,RSG,2001,True,RSG_2001,"1,2",37,0,0,0
+25,竹林熊貓,3,8,Royal,1002270025,RSG,25,True,RSG_25,"1,2",38,0,0,0
+113,秦皇傳說,3,8,Royal,1002270081,RSG,113,True,RSG_113,"1,2",39,0,0,0
+70,鼠來寶,3,8,Royal,1002270076,RSG,70,True,RSG_70,"1,2",40,0,0,0
+34,非洲,3,8,Royal,1002270040,RSG,34,True,RSG_34,"1,2",41,0,0,0
+27,財神到,3,8,Royal,1002270027,RSG,27,True,RSG_27,"1,2",42,0,0,0
+39,武媚娘,3,8,Royal,1002270048,RSG,39,True,RSG_39,"1,2",43,0,0,0
+16,大力水手,3,8,Royal,1002270016,RSG,16,True,RSG_16,"1,2",44,0,0,0
+4,慾望城市,3,8,Royal,1002270004,RSG,4,True,RSG_4,"1,2",45,0,0,0
+55,嗨起來,3,8,Royal,1002270057,RSG,55,True,RSG_55,"1,2",46,0,0,0
+15,烈焰轉輪,3,8,Royal,1002270032,RSG,15,True,RSG_15,"1,2",47,0,0,0
+5,金鷄報喜,3,8,Royal,1002270005,RSG,5,True,RSG_5,"1,2",48,0,0,0
+10,動物叢林,3,8,Royal,1002270010,RSG,10,True,RSG_10,"1,2",49,0,0,0
+2,魔法石,3,8,Royal,1002270001,RSG,2,True,RSG_2,"1,2",50,0,0,0
+119,魔龍傳奇,3,8,Royal,1002270084,RSG,119,True,RSG_119,"1,2",51,0,0,0
+44,七起來,3,8,Royal,1002270050,RSG,44,True,RSG_44,"1,2",52,0,0,0
+41,泰山,3,8,Royal,1002270044,RSG,41,True,RSG_41,"1,2",53,0,0,0
+12,野蠻遊戲,3,8,Royal,1002270012,RSG,12,True,RSG_12,"1,2",54,0,0,0
+56,西部牛仔,3,8,Royal,1002270058,RSG,56,True,RSG_56,"1,2",55,0,0,0
+26,泰好運,3,8,Royal,1002270026,RSG,26,True,RSG_26,"1,2",56,0,0,0
+38,農場夜驚魂,3,8,Royal,1002270037,RSG,38,True,RSG_38,"1,2",57,0,0,0
+43,金豬爆吉,3,8,Royal,1002270046,RSG,43,True,RSG_43,"1,2",58,0,0,0
+33,幸運拉霸,3,8,Royal,1002270034,RSG,33,True,RSG_33,"1,2",59,0,0,0
+65,太極,3,8,Royal,1002270065,RSG,65,True,RSG_65,"1,2",60,0,0,0
+18,永不停止,3,8,Royal,1002270018,RSG,18,True,RSG_18,"1,2",61,0,0,0
+14,甜蜜糖果,3,8,Royal,1002270014,RSG,14,True,RSG_14,"1,2",62,0,0,0
+61,黃金之書,3,8,Royal,1002270067,RSG,61,True,RSG_61,"1,2",63,0,0,0
+53,霓虹圓,3,8,Royal,1002270055,RSG,53,True,RSG_53,"1,2",64,0,0,0
+36,家犬先生,3,8,Royal,1002270042,RSG,36,True,RSG_36,"1,2",65,0,0,0
+11,虎克船長,3,8,Royal,1002270011,RSG,11,True,RSG_11,"1,2",66,0,0,0
+66,金色幸運草,3,8,Royal,1002270071,RSG,66,True,RSG_66,"1,2",67,0,0,0
+49,海神,3,8,Royal,1002270054,RSG,49,True,RSG_49,"1,2",68,0,0,0
+42,墨西哥辣椒,3,8,Royal,1002270045,RSG,42,True,RSG_42,"1,2",69,0,0,0
+37,迪斯可之夜,3,8,Royal,1002270036,RSG,37,True,RSG_37,"1,2",70,0,0,0
+29,HUSA,3,8,Royal,1002270029,RSG,29,True,RSG_29,"1,2",71,0,0,0
+72,潑水節,3,8,Royal,1002270080,RSG,72,True,RSG_72,"1,2",72,0,0,0
+45,女忍者,3,8,Royal,1002270052,RSG,45,True,RSG_45,"1,2",73,0,0,0
+68,巫師商店黃金版,3,8,Royal,1002270077,RSG,68,True,RSG_68,"1,2",74,0,0,0
+46,忍者,3,8,Royal,1002270053,RSG,46,True,RSG_46,"1,2",75,0,0,0
+35,巫師商店,3,8,Royal,1002270041,RSG,35,True,RSG_35,"1,2",76,0,0,0
+32,礦工哥布林,3,8,Royal,1002270031,RSG,32,True,RSG_32,"1,2",77,0,0,0
+23,人魚傳說,3,8,Royal,1002270023,RSG,23,True,RSG_23,"1,2",78,0,0,0
+58,賣火柴的小女孩,3,8,Royal,1002270066,RSG,58,True,RSG_58,"1,2",79,0,0,0
+73,精靈射手,3,8,Royal,1002270068,RSG,73,True,RSG_73,"1,2",80,0,0,0
+47,果凍27,3,8,Royal,1002270051,RSG,47,True,RSG_47,"1,2",81,0,0,0
+60,嘻哈金剛,3,8,Royal,1002270072,RSG,60,True,RSG_60,"1,2",82,0,0,0
+76,小熊王國,3,8,Royal,1002270064,RSG,76,True,RSG_76,"1,2",83,0,0,0
+48,暴怒棕熊,3,8,Royal,1002270056,RSG,48,True,RSG_48,"1,2",84,0,0,0
+3001,八爪天下海霸王,3,8,Royal,1002270047,RSG,3001,True,RSG_3001,"1, 3",85,0,0,0
+3002,福娃捕魚,3,8,Royal,1002270060,RSG,3002,True,RSG_3002,"1, 3",86,0,0,0
