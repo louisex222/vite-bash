@@ -134,7 +134,6 @@ const fcCheckGame = async(sheetIndex)=>{
         //濾出 item裡的值有'V'的資料
         return Object.values(item).some((value)=> value === 'V')
     })
-
     // xlsx資料轉成map獲得總數
     const orderMap :any = new Map(searchArr.map((item,index)=> [item['zh-tw'],index]))
 
@@ -161,12 +160,17 @@ const fcCheckGame = async(sheetIndex)=>{
 
     //csv資料少於xlsx資料時新增沒有的資料
     orderMap.forEach((_,key)=>{
+        const gameId = searchArr.find((item)=> item['zh-tw'] === key)?.gameid
         if(!gameData.find((item)=> item.gameName === key)){
             gameData.push({
                 ...gameData[0],
                 gameName: key,
+                gameId: gameId,
+                imageName: gameId,
+                localizationCode: `${localizationCode(thirdPartyId)}_${gameId}`,
                 sort: (orderMap.get(key) + 1).toString(),
             })
+
         }
     })
 

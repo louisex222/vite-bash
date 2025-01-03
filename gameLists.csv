@@ -83,5 +83,5 @@ gameId,gameName,gameType,gameClubId,thirdPartyId,serverId,imagePath,imageName,ac
 48,暴怒棕熊,3,8,Royal,1002270056,RSG,48,True,RSG_48,"1,2",84,0,0,0
 3001,八爪天下海霸王,3,8,Royal,1002270047,RSG,3001,True,RSG_3001,"1,2",85,0,0,0
 3002,福娃捕魚,3,8,Royal,1002270060,RSG,3002,True,RSG_3002,"1,2",86,0,0,0
-118,大過年3,3,8,Royal,1002270060,RSG,127,True,RSG_127,"1,2",1,0,0,0
-118,逛夜市3,3,8,Royal,1002270060,RSG,126,True,RSG_126,"1,2",2,0,0,0
+127,大過年3,3,8,Royal,1002270060,RSG,127,True,RSG_127,"1,2",1,0,0,0
+126,逛夜市3,3,8,Royal,1002270060,RSG,126,True,RSG_126,"1,2",2,0,0,0
