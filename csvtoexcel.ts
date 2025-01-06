@@ -190,7 +190,9 @@ const fcCheckGame = async(sheetIndex)=>{
     function getSearchInfo(item, searchArr) {
         const searchItem = searchArr.find(search => search['zh-tw'] === item.gameName);
         const searchIndex = searchItem ? searchArr.indexOf(searchItem) : -1;
-        const hotGameList = ['麻將發了2', '狗來富', '侏羅紀寶藏', '麻將發了', '超級王牌2', '迦羅寶石4', '雷神之錘', '聚寶財神', '五龍爭霸', '法老王', '法老王 II', '戰神呂布', '羅馬競技場', '有請財神'];
+        const hotGameList = ['麻將發了2', '大過年3','逛夜市3','麻將發了','超級王牌2','迦羅寶石4','雷神之錘','聚寶財神','五龍爭霸','法老王','法老王 II','狗來富','戰神呂布','有請財神','八爪天下海霸王'
+            ,'福娃捕魚'];
+
         const isHotGame = hotGameList.includes(item.gameName);
         const searchOther = searchArr.some(search => search['老虎機'] === '其他');
         const searchFish = searchArr.some(search => search['老虎機'] === '魚機');

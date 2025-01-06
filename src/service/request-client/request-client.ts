@@ -38,7 +38,12 @@ class RequestClient {
     public async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<T> {
         return this.request<T>(url, { ...config, method: 'GET' });
     }
-
+    public async post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+        return this.request<T>(url, { ...config, method: 'POST', data });
+    }
+    public async delete<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<T> {
+        return this.request<T>(url, { ...config, method: 'DELETE', data });
+    }
 
 }
 export{ RequestClient }

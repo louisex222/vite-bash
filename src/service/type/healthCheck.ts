@@ -1,6 +1,7 @@
 import {request} from '../index'
 import {AxiosResponse} from 'axios'
 import {byJwtrequest} from "@/service/byjwtindex";
+import {requestClient} from '../request'
 /**
  * 透過對指定URL進行GET請求來執行健康檢查的函數。
  *
@@ -36,4 +37,20 @@ export const getClubStartFlagApi = ():Promise<AxiosResponse<any>> => {
         method: 'post',
         data: {}
     })
+}
+interface IUserData {
+    id:number,
+    name:string,
+    description:string,
+}
+
+export const getUserDataApi  = () =>{
+    return requestClient.get<IUserData>('http://localhost:8000/user')
+}
+
+export const createUserDataApi = (data:IUserData) =>{
+    return requestClient.post<IUserData>('http://localhost:8000/user',data)
+}
+export const updateUserDataApi = (id:number) =>{
+    return requestClient.post(`http://localhost:8000/user/${id}`)
 }
