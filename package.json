@@ -11,7 +11,7 @@
     "prepare": "husky install",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx  --fix",
     "lint:ts": "tsc --noEmit",
-    "csv": "ts-node csvtojson.ts",
+    "lang": "node checkLang.js",
     "excel": "ts-node csvtoexcel.ts",
     "start": "ts-node csvv.ts"
   },

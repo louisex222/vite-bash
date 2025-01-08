@@ -14,8 +14,8 @@ const langs = langArray.reduce((result, lang) => {
     return last;
 }, {});
 
-const csv = fs.readFileSync('./tools/langs.csv', 'utf8');
-const xlsx = XLSX.readFile('./tools/langList.xlsx');
+const csv = fs.readFileSync('langs.csv', 'utf8');
+const xlsx = XLSX.readFile('langList.xlsx');
 const sheetName = xlsx.SheetNames;
 
 const mapArr = {
