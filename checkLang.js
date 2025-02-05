@@ -67,6 +67,15 @@ const mapArr = {
     kr: 'ko-kr',
     ja: 'ja-jp',
     'ja\n日文': 'ja-jp',
+    '繁體中文zh-tw': 'zh-tw',
+    '簡體中文zh-cn': 'zh-cn',
+    '英文en-us':'en-us',
+    '泰文th-th':'th-th',
+    '韓文ko-kr':'ko-kr',
+    '緬甸語my-mm':'my-mm',
+    '印尼語id-id':'id-id',
+    '越南文vi-vn':'vi-vn',
+    '日文ja-jp': 'ja-jp',
 };
 const tableArr = parse(csv);
 
@@ -130,7 +139,9 @@ const fcCheckGameName = async (sheetIndex) => {
                 const flag = searchArr
                     .some((item) => Object.values(item).includes(element) && item.name === id);
                 const halfFlag = searchArr
-                    .some((item) => item.name === id && !Object.values(item).includes(element));
+                    .some((item) => {
+                        return item.name === id && !Object.values(item).includes(element)
+                    });
                 const lang = langArray[index];
                 if (lang === undefined || element === '') return;
                 if (flag) {
@@ -138,6 +149,7 @@ const fcCheckGameName = async (sheetIndex) => {
                     if (searchArr.filter((item) => item.name === id).length > 1) {
                         // console.log(`key: ${id} lang: ${lang} name: ${element}  重複❌`);
                     }
+
                 } else if (halfFlag) {
                     console.log(`key: ${id} lang: ${lang} name: ${element}  錯誤❌`);
                 }

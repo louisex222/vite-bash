@@ -12,10 +12,7 @@ import {Ref} from 'vue';
 import { getUserDataApi ,createUserDataApi,updateUserDataApi } from '@/service/type/healthCheck';
 
 const userData:Ref<any> = ref()
-const data = {
-  name: 'John',
-  description: 'This is a sample description',
-}
+
 const getUserData = async () => {
   try {
     userData.value =await getUserDataApi();
@@ -26,6 +23,13 @@ const getUserData = async () => {
 getUserData()
 const createUserData = async () => {
   try {
+    const random = Math.floor(Math.random() * 1000);
+    const data = {
+      name: 'John',
+      description: 'This is a sample description',
+      sort: random,
+      id: userData.value.length
+    }
     await createUserDataApi(data);
     getUserData()
   } catch (error) {
