@@ -13,7 +13,8 @@
     "lint:ts": "tsc --noEmit",
     "lang": "node checkLang.js",
     "excel": "ts-node csvtoexcel.ts",
-    "start": "ts-node csvv.ts"
+    "start": "ts-node csvv.ts",
+    "excellive":"ts-node csvtoexcellive.ts"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",

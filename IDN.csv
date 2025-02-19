@@ -1,0 +1,13 @@
+﻿id,gameType,thirdPartyId,clubType,name,active,localizationCode,deskDisplayName,imageName,imagePath,desk,categoryIdList,sort,serverId,style
+"49","1","IDN","roulette","轮盘 2 快速桌","True","IDN_rlb"," ","rlb","IDN","rlb","1,4","4","2000000026","4"
+"49","1","IDN","DT","龙虎","True","IDN_dragontiger"," ","dragontiger","IDN","dragontiger","1,4","4","2000000026","4"
+"49","1","IDN","other","6D 颜色","True","IDN_6dcolor"," ","6dcolor","IDN","6dcolor","1,4","8","2000000026","4"
+"49","1","IDN","other","24 大奖","True","IDN_24db"," ","24db","IDN","24db","1,4","9","2000000026","4"
+"49","1","IDN","other","骰子狂热 6","True","IDN_dice6b"," ","dice6b","IDN","dice6b","1,4","10","2000000026","4"
+"49","1","IDN","other","头尾","True","IDN_headtail"," ","headtail","IDN","headtail","1","11","2000000026","4"
+"49","1","IDN","other","Suwit","True","IDN_suwit"," ","suwit","IDN","suwit","1","12","2000000026","4"
+"49","1","IDN","other","红白","True","IDN_redwhite"," ","redwhite","IDN","redwhite","1","13","2000000026","4"
+"49","1","IDN","other","扑克骰子","True","IDN_pokerdice"," ","pokerdice","IDN","pokerdice","1","14","2000000026","4"
+"49","1","IDN","other","Xoc Dia","True","IDN_xocdia"," ","xocdia","IDN","xocdia","1","15","2000000026","4"
+"49","1","IDN","other","大富翁游戏","True","IDN_mp"," ","mp","IDN","mp","1","16","2000000026","4"
+"49","1","IDN","baccarat","百家乐","True","IDN_baccarat"," ","baccarat","IDN","baccarat","1,4","25","2000000026","4"

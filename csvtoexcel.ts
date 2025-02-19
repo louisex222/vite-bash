@@ -4,7 +4,7 @@ const { parse: csvParse } = require('csv-parse/sync');
 const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const parser  = require('csv-parser');
 // 主函數，執行轉換流程
-const thirdPartyId = 'RSG'
+const thirdPartyId = 'IDN'
 const csvWriter = createCsvWriter({
     path: 'gameLists.csv',
     header:[
